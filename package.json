@@ -1,0 +1,20 @@
+{
+  "name": "@plemu-labs/landing",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "vite build",
+    "preview": "vite preview --host 127.0.0.1",
+    "test": "node --test scripts/*.test.mjs",
+    "format:check": "prettier --check index.html src scripts vite.config.mjs package.json README.md"
+  },
+  "devDependencies": {
+    "vite": "8.3.3",
+    "prettier": "3.9.9"
+  },
+  "engines": {
+    "node": ">=22.18.0"
+  }
+}
