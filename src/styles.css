@@ -91,6 +91,9 @@ p {
 .skip-link:focus {
   transform: none;
 }
+.skip-link:not(:focus) {
+  clip-path: inset(50%);
+}
 .site-header {
   height: 98px;
 }

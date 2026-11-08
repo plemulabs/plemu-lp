@@ -1,4 +1,5 @@
 import "./styles.css";
+import "./seeker.css";
 
 const preview = document.querySelector("#app-preview");
 const caption = document.querySelector("#preview-caption");
@@ -25,3 +26,27 @@ document.querySelectorAll("[data-screen]").forEach((button) => {
     caption.textContent = `Seeker beta app preview — ${button.textContent}`;
   });
 });
+
+const showcase = document.querySelector("[data-seeker-showcase]");
+if (showcase && !navigator.connection?.saveData) {
+  const loadShowcase = async () => {
+    try {
+      const { mountSeeker } = await import("./seeker-scene.js");
+      await mountSeeker(showcase);
+    } catch {
+      showcase.dataset.scene = "fallback";
+    }
+  };
+  if ("IntersectionObserver" in window) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) {
+          observer.disconnect();
+          void loadShowcase();
+        }
+      },
+      { rootMargin: "250px" },
+    );
+    observer.observe(showcase);
+  } else void loadShowcase();
+}

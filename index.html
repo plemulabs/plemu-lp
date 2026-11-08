@@ -39,7 +39,7 @@
               height="1080" /></span
         ></a>
         <nav aria-label="Main navigation">
-          <a href="#the-app">The app</a>
+          <a href="#the-app">Seeker native</a>
           <a href="#onchain">Onchain</a>
         </nav>
         <a class="header-cta" href="https://devnet.plemu.xyz"
@@ -129,61 +129,168 @@
           </p>
         </div>
       </section>
-      <section class="app-section" id="the-app" aria-labelledby="app-title">
-        <div class="container app-inner">
-          <div class="app-heading">
-            <p class="section-kicker">Made for your downtime.</p>
-            <h2 id="app-title">Your library.<br />Your kind of play.</h2>
-            <a
-              class="text-link"
-              href="mailto:support@plemu.xyz?subject=Plemu%20Seeker%20beta"
-              >Ask about the Seeker beta <span aria-hidden="true">↗</span></a
-            >
+      <section
+        class="seeker-section"
+        id="the-app"
+        aria-labelledby="seeker-title"
+      >
+        <div class="container seeker-inner">
+          <div class="seeker-intro">
+            <div class="seeker-ecosystem">
+              <span class="native-label"
+                ><i aria-hidden="true"></i> Seeker native</span
+              >
+              <span class="solana-label"
+                ><svg viewBox="0 0 30 25" aria-hidden="true">
+                  <defs>
+                    <linearGradient
+                      id="solana-colors"
+                      x1="0"
+                      y1="1"
+                      x2="1"
+                      y2="0"
+                    >
+                      <stop stop-color="#9945ff" />
+                      <stop offset="1" stop-color="#14f195" />
+                    </linearGradient>
+                  </defs>
+                  <path
+                    fill="url(#solana-colors)"
+                    d="m5 1-5 5h24l5-5ZM0 10l5 5h24l-5-5Zm5 9-5 5h24l5-5Z"
+                  />
+                </svg>
+                Solana</span
+              >
+            </div>
+            <h2 id="seeker-title">Made for Seeker.<br />At home on Solana.</h2>
+            <p class="seeker-description">
+              A native Android app for your Seeker, with your library right
+              where it belongs. Local play comes first. Solana is there when you
+              want to go onchain.
+            </p>
           </div>
-          <div class="app-features">
-            <article>
-              <div class="feature-symbol" aria-hidden="true">
-                <svg viewBox="0 0 32 32">
-                  <path d="M7 5h18v22H7zM11 5v9h10V5M12 21h8" />
-                </svg>
+          <figure
+            class="seeker-showcase"
+            data-seeker-showcase
+            data-scene="fallback"
+          >
+            <div class="seeker-render" data-seeker-render>
+              <div class="seeker-orbit" aria-hidden="true"></div>
+              <div class="seeker-pixels" aria-hidden="true">
+                <i></i><i></i><i></i><i></i>
+              </div>
+              <div class="seeker-fallback">
+                <div class="seeker-fallback-camera" aria-hidden="true"></div>
+                <img
+                  data-seeker-fallback
+                  src="/images/seeker-discover-current.png"
+                  alt="Plemu installed on Seeker, showing its native beta Discover screen"
+                  width="1080"
+                  height="2400"
+                  loading="lazy"
+                />
+              </div>
+              <div class="seeker-canvas" data-seeker-canvas></div>
+              <span class="seeker-running"
+                ><i aria-hidden="true"></i> Plemu, on Seeker.</span
+              >
+            </div>
+            <div class="seeker-controls" data-seeker-controls hidden>
+              <div
+                class="seeker-screens"
+                role="group"
+                aria-label="Choose Seeker screen"
+              >
+                <button
+                  type="button"
+                  data-seeker-screen="discover"
+                  aria-pressed="true"
+                >
+                  Discover</button
+                ><button
+                  type="button"
+                  data-seeker-screen="library"
+                  aria-pressed="false"
+                >
+                  Library
+                </button>
+              </div>
+              <button type="button" class="seeker-turn" data-seeker-turn>
+                Turn Seeker <span aria-hidden="true">↻</span>
+              </button>
+              <button
+                type="button"
+                class="seeker-motion"
+                data-seeker-motion
+                aria-pressed="false"
+                aria-label="Pause Seeker animation"
+              >
+                <span data-motion-icon aria-hidden="true">Ⅱ</span>
+              </button>
+            </div>
+            <figcaption id="seeker-caption">
+              Illustrative Seeker render. Actual Plemu beta screens.<span
+                data-seeker-hint
+                hidden
+              >
+                Drag to turn, or use the controls.</span
+              >
+            </figcaption>
+          </figure>
+          <div class="seeker-copy">
+            <dl class="seeker-details">
+              <div>
+                <dt>Native, from the first tap.</dt>
+                <dd>
+                  Your games, saves and touch controls, right on your device.
+                </dd>
               </div>
               <div>
-                <h3>Bring your favorites.</h3>
-                <p>
-                  Import compatible files you’re entitled to use. Keep your
-                  retro library together on your device.
-                </p>
-              </div>
-            </article>
-            <article>
-              <div class="feature-symbol" aria-hidden="true">
-                <svg viewBox="0 0 32 32">
-                  <path d="M5 16h22M10 8l-6 8 6 8M22 8l6 8-6 8M17 6l-3 20" />
-                </svg>
+                <dt>Your wallet comes with you.</dt>
+                <dd>
+                  Connect through Solana Mobile Wallet Adapter. You approve each
+                  action in your own wallet.
+                </dd>
               </div>
               <div>
-                <h3>Find your offline moment.</h3>
-                <p>
-                  Local games and saves stay on your device. Settle into a
-                  familiar world, wherever downtime finds you.
-                </p>
+                <dt>A little more, on Solana.</dt>
+                <dd>
+                  Explore game tokens and packs with the Plemu protocol on
+                  Solana Devnet.
+                </dd>
               </div>
-            </article>
-            <article>
-              <div class="feature-symbol" aria-hidden="true">
-                <svg viewBox="0 0 32 32">
-                  <path d="m16 3 3 9 10 4-10 4-3 9-3-9-10-4 10-4Z" />
-                </svg>
-              </div>
-              <div>
-                <h3>Connect when you choose.</h3>
-                <p>
-                  Local imports don’t need a wallet. Optional Solana features
-                  use your own compatible wallet app.
-                </p>
-              </div>
-            </article>
+            </dl>
+            <div class="seeker-links">
+              <a
+                class="button button-primary"
+                href="mailto:support@plemu.xyz?subject=Plemu%20Seeker%20beta"
+                >Ask about the Seeker beta <span aria-hidden="true">↗</span></a
+              ><a
+                class="text-link"
+                href="https://solanamobile.com/seeker"
+                target="_blank"
+                rel="noopener noreferrer"
+                >Meet Solana Seeker <span aria-hidden="true">↗</span></a
+              >
+            </div>
+            <p class="seeker-network-note">
+              Onchain features currently use Devnet. Test tokens have no
+              monetary value.
+            </p>
           </div>
+        </div>
+        <div class="container seeker-play-notes">
+          <p>
+            <span aria-hidden="true">▦</span> Bring the games you’re entitled to
+            use.
+          </p>
+          <p>
+            <span aria-hidden="true">✧</span> Keep your local games and saves
+            with you.
+          </p>
+          <p>
+            <span aria-hidden="true">◇</span> No wallet needed to press play.
+          </p>
         </div>
       </section>
       <section

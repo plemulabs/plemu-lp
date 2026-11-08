@@ -11,10 +11,13 @@
     "format:check": "prettier --check index.html src scripts vite.config.mjs package.json README.md"
   },
   "devDependencies": {
-    "vite": "8.3.3",
-    "prettier": "3.9.9"
+    "prettier": "3.9.9",
+    "vite": "8.3.3"
   },
   "engines": {
     "node": ">=22.18.0"
+  },
+  "dependencies": {
+    "three": "0.187.0"
   }
 }
