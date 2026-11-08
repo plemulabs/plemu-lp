@@ -471,17 +471,6 @@ h1 {
   height: 4px;
   background: #9383c7;
 }
-.app-section {
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
-  background: #17191f;
-}
-.app-inner {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 100px;
-  padding-block: 84px;
-}
 .section-kicker {
   font-size: 12px;
   color: var(--violet);
@@ -494,44 +483,12 @@ h2 {
   letter-spacing: -2.6px;
   font-weight: 500;
 }
-.app-heading .text-link {
-  margin-top: 27px;
-}
-.app-features {
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-}
-.app-features article {
-  display: flex;
-  gap: 23px;
-  align-items: flex-start;
-}
-.feature-symbol {
-  color: var(--lime);
-  padding-top: 2px;
-}
-.feature-symbol svg {
-  width: 31px;
-  height: 31px;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 1.5;
-  stroke-linecap: square;
-  stroke-linejoin: miter;
-}
 h3 {
   font-family: var(--heading);
   font-weight: 500;
   font-size: 20px;
   letter-spacing: -0.4px;
   margin-bottom: 8px;
-}
-.app-features p {
-  font-size: 14px;
-  color: #a9abb4;
-  line-height: 1.65;
-  max-width: 380px;
 }
 .onchain-section {
   padding-block: 88px 94px;
@@ -784,7 +741,6 @@ h3 {
     right: -2px;
     top: 55px;
   }
-  .app-inner,
   .onchain-section {
     gap: 55px;
   }
@@ -893,20 +849,10 @@ h3 {
   .preview-control {
     margin-top: 10px;
   }
-  .app-inner,
   .onchain-section {
     gap: 40px;
     padding-block: 60px;
     grid-template-columns: 1fr;
-  }
-  .app-heading {
-    max-width: 450px;
-  }
-  .app-features {
-    gap: 26px;
-  }
-  .app-features p {
-    max-width: 540px;
   }
   .onchain-copy > p {
     max-width: 590px;
@@ -1057,7 +1003,6 @@ h3 {
   .preview-caption {
     font-size: 9px;
   }
-  .app-inner,
   .onchain-section {
     padding-block: 47px;
     gap: 31px;
@@ -1070,22 +1015,8 @@ h3 {
     font-size: 39px;
     letter-spacing: -1.9px;
   }
-  .app-heading .text-link {
-    margin-top: 18px;
-  }
-  .app-features article {
-    gap: 17px;
-  }
-  .feature-symbol svg {
-    width: 27px;
-    height: 27px;
-  }
   h3 {
     font-size: 18px;
-  }
-  .app-features p {
-    font-size: 13px;
-    line-height: 1.75;
   }
   .onchain-copy > p {
     font-size: 16px;

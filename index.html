@@ -8,13 +8,56 @@
       name="description"
       content="Retro play, built for Seeker. Meet Plemu: a home for your local game library and a platform for exploring blockchain technologies."
     />
-    <meta property="og:title" content="Plemu — Your next little escape." />
+    <meta property="og:title" content="Plemu — Retro gaming on Solana Seeker" />
     <meta
       property="og:description"
       content="Retro play, built for Seeker. Discover the Plemu app and explore the Devnet preview."
     />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://plemu.xyz" />
+    <meta property="og:url" content="https://plemu.xyz/" />
+    <meta property="og:site_name" content="Plemu" />
+    <meta
+      property="og:image"
+      content="https://plemu.xyz/brand/plemu-wordmark-alt.png"
+    />
+    <meta property="og:image:width" content="1920" />
+    <meta property="og:image:height" content="1080" />
+    <meta property="og:image:alt" content="Plemu pixel face and wordmark" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Plemu — Retro gaming on Solana Seeker"
+    />
+    <meta
+      name="twitter:description"
+      content="A native Seeker app for your local game library. Explore optional token features on Solana Devnet."
+    />
+    <meta
+      name="twitter:image"
+      content="https://plemu.xyz/brand/plemu-wordmark-alt.png"
+    />
+    <meta name="twitter:image:alt" content="Plemu pixel face and wordmark" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "WebSite",
+            "@id": "https://plemu.xyz/#website",
+            "url": "https://plemu.xyz/",
+            "name": "Plemu",
+            "publisher": { "@id": "https://plemu.xyz/#organization" }
+          },
+          {
+            "@type": "Organization",
+            "@id": "https://plemu.xyz/#organization",
+            "name": "Plemu Labs LLC",
+            "url": "https://plemu.xyz/",
+            "logo": "https://plemu.xyz/brand/plemu-pixel-face.png"
+          }
+        ]
+      }
+    </script>
     <link rel="canonical" href="https://plemu.xyz/" />
     <link rel="icon" href="/brand/plemu-pixel-face.png" type="image/png" />
     <link
@@ -24,7 +67,7 @@
       type="font/woff2"
       crossorigin
     />
-    <title>Plemu — Your next little escape.</title>
+    <title>Plemu — Retro gaming on Solana Seeker</title>
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -93,8 +136,8 @@
                   id="app-preview"
                   src="/images/seeker-discover-current.png"
                   alt="Plemu Seeker beta Discover screen with retro-game library and welcome pack"
-                  width="740"
-                  height="1644"
+                  width="1080"
+                  height="2400"
                   fetchpriority="high"
                 />
               </div>
@@ -231,6 +274,7 @@
             <figcaption id="seeker-caption">
               Illustrative Seeker render. Actual Plemu beta screens.<span
                 data-seeker-hint
+                aria-live="polite"
                 hidden
               >
                 Drag to turn, or use the controls.</span

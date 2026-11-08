@@ -284,6 +284,7 @@ export async function mountSeeker(root) {
   scene.add(rim);
   scene.add(new AmbientLight(0xffffff, 0.5));
   const textures = {};
+  const pendingTextures = new Map();
   let phone;
   let environmentDisposed = false;
   const controller = new AbortController();
@@ -302,6 +303,7 @@ export async function mountSeeker(root) {
   let drag = null;
   let observer;
   let resize;
+  let screenSelection = 0;
   function stop() {
     cancelAnimationFrame(frame);
     frame = 0;
@@ -340,18 +342,27 @@ export async function mountSeeker(root) {
   }
   try {
     const loader = new TextureLoader();
-    await Promise.all(
-      Object.entries(screens).map(async ([name, screen]) => {
-        const texture = await loader.loadAsync(screen.src);
-        texture.colorSpace = SRGBColorSpace;
-        texture.anisotropy = Math.min(
-          4,
-          renderer.capabilities.getMaxAnisotropy(),
-        );
-        if (disposed) texture.dispose();
-        else textures[name] = texture;
-      }),
-    );
+    function loadScreen(name) {
+      if (textures[name]) return Promise.resolve(textures[name]);
+      if (!pendingTextures.has(name)) {
+        const pending = loader
+          .loadAsync(screens[name].src)
+          .then((texture) => {
+            texture.colorSpace = SRGBColorSpace;
+            texture.anisotropy = Math.min(
+              4,
+              renderer.capabilities.getMaxAnisotropy(),
+            );
+            if (disposed) texture.dispose();
+            else textures[name] = texture;
+            return texture;
+          })
+          .finally(() => pendingTextures.delete(name));
+        pendingTextures.set(name, pending);
+      }
+      return pendingTextures.get(name);
+    }
+    await loadScreen("discover");
     await document.fonts.ready;
     if (!root.isConnected) {
       dispose();
@@ -412,21 +423,37 @@ export async function mountSeeker(root) {
     root.querySelectorAll("[data-seeker-screen]").forEach((button) => {
       button.addEventListener(
         "click",
-        () => {
+        async () => {
           const name = button.dataset.seekerScreen;
-          if (!textures[name]) return;
-          model.screenMaterial.map = textures[name];
-          model.screenMaterial.needsUpdate = true;
-          fallback.src = screens[name].src;
-          fallback.alt = screens[name].alt;
-          root
-            .querySelectorAll("[data-seeker-screen]")
-            .forEach((other) =>
-              other.setAttribute("aria-pressed", String(other === button)),
-            );
+          if (!screens[name]) return;
+          const selection = ++screenSelection;
           backShown = false;
           targetYaw = FRONT;
           wake();
+          controls.setAttribute("aria-busy", "true");
+          const hint = root.querySelector("[data-seeker-hint]");
+          if (!textures[name]) hint.textContent = " Loading preview…";
+          try {
+            const texture = await loadScreen(name);
+            if (disposed || selection !== screenSelection) return;
+            model.screenMaterial.map = texture;
+            fallback.src = screens[name].src;
+            fallback.alt = screens[name].alt;
+            root
+              .querySelectorAll("[data-seeker-screen]")
+              .forEach((other) =>
+                other.setAttribute("aria-pressed", String(other === button)),
+              );
+            hint.textContent = " Drag to turn, or use the controls.";
+            wake();
+          } catch {
+            if (!disposed && selection === screenSelection)
+              hint.textContent =
+                " Preview unavailable. Choose the screen to try again.";
+          } finally {
+            if (!disposed && selection === screenSelection)
+              controls.removeAttribute("aria-busy");
+          }
         },
         { signal },
       );

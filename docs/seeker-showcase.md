@@ -4,7 +4,7 @@
 
 ## Controls and rendering
 
-- Discover and Library select the actual Plemu beta screenshots in [public/images](../public/images/).
+- Discover and Library select the actual Plemu beta screenshots in [public/images](../public/images/). The Library texture loads on first selection and is retained for later switches. A failed load keeps the current screen and can be retried. Late loads never replace a newer selection.
 - Turn Seeker shows the front or back; pointer dragging changes orientation.
 - The motion button pauses or resumes animation. Reduced motion starts paused.
 - Rendering stops when the section leaves the viewport or the document is hidden. Page teardown releases GPU resources.
