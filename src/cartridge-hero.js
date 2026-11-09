@@ -7,6 +7,8 @@ import {
   DirectionalLight,
   ExtrudeGeometry,
   Group,
+  InstancedMesh,
+  Matrix4,
   MathUtils,
   Mesh,
   MeshBasicMaterial,
@@ -113,6 +115,23 @@ function slab(width, height, depth, radius, material) {
 function box(parent, x, y, z, width, height, depth, material) {
   const mesh = new Mesh(new BoxGeometry(width, height, depth), material);
   mesh.position.set(x, y, z);
+  parent.add(mesh);
+  return mesh;
+}
+
+function repeatedBoxes(parent, dimensions, material) {
+  const mesh = new InstancedMesh(
+    new BoxGeometry(1, 1, 1),
+    material,
+    dimensions.length,
+  );
+  const matrix = new Matrix4();
+  dimensions.forEach(([x, y, z, width, height, depth], index) => {
+    matrix.makeScale(width, height, depth);
+    matrix.setPosition(x, y, z);
+    mesh.setMatrixAt(index, matrix);
+  });
+  mesh.instanceMatrix.needsUpdate = true;
   parent.add(mesh);
   return mesh;
 }
@@ -341,8 +360,18 @@ function createConsole() {
   box(group, 0, 0.305, -0.01, 2.91, 0.09, 0.11, graphite);
   const railLeft = box(group, -1.405, 0.31, -0.35, 0.075, 0.12, 0.65, metal);
   const railRight = box(group, 1.405, 0.31, -0.35, 0.075, 0.12, 0.65, metal);
-  for (let i = 0; i < 12; i++)
-    box(group, -1.08 + i * 0.196, 0.309, -0.35, 0.055, 0.024, 0.25, gold);
+  repeatedBoxes(
+    group,
+    Array.from({ length: 12 }, (_, i) => [
+      -1.08 + i * 0.196,
+      0.309,
+      -0.35,
+      0.055,
+      0.024,
+      0.25,
+    ]),
+    gold,
+  );
   const latchMaterial = new MeshStandardMaterial({
     color: 0xb7d638,
     emissive: 0x88b72d,
@@ -433,10 +462,28 @@ function createConsole() {
   const logo = new Mesh(new PlaneGeometry(0.42, 0.42), logoMaterial);
   logo.position.set(-2.83, -0.47, 1.526);
   group.add(logo);
-  for (let i = 0; i < 5; i++)
-    box(group, -2.08 + i * 0.115, -0.51, 1.505, 0.025, 0.16, 0.025, black);
-  for (let i = 0; i < 6; i++)
-    box(group, 3.525, -0.49, -0.9 + i * 0.22, 0.022, 0.14, 0.09, black);
+  repeatedBoxes(
+    group,
+    [
+      ...Array.from({ length: 5 }, (_, i) => [
+        -2.08 + i * 0.115,
+        -0.51,
+        1.505,
+        0.025,
+        0.16,
+        0.025,
+      ]),
+      ...Array.from({ length: 6 }, (_, i) => [
+        3.525,
+        -0.49,
+        -0.9 + i * 0.22,
+        0.022,
+        0.14,
+        0.09,
+      ]),
+    ],
+    black,
+  );
   box(group, -3.535, -0.51, 0.4, 0.025, 0.13, 0.34, black);
   box(group, -3.55, -0.51, 0.4, 0.026, 0.04, 0.22, metal);
   for (const x of [-2.7, 2.7])
@@ -546,11 +593,33 @@ function createCartridge(game, index) {
   const connector = slab(1.5, 0.18, 0.2, 0.02, dark);
   connector.position.y = -1.285;
   group.add(connector);
-  for (let i = 0; i < 10; i++)
-    box(group, -0.63 + i * 0.14, -1.3, 0.12, 0.062, 0.15, 0.025, gold);
+  repeatedBoxes(
+    group,
+    Array.from({ length: 10 }, (_, i) => [
+      -0.63 + i * 0.14,
+      -1.3,
+      0.12,
+      0.062,
+      0.15,
+      0.025,
+    ]),
+    gold,
+  );
+  repeatedBoxes(
+    group,
+    [-1, 1].flatMap((side) =>
+      Array.from({ length: 3 }, (_, i) => [
+        side * 1.011,
+        0.5 + i * 0.13,
+        0,
+        0.018,
+        0.025,
+        0.17,
+      ]),
+    ),
+    edge,
+  );
   for (const side of [-1, 1]) {
-    for (let i = 0; i < 3; i++)
-      box(group, side * 1.011, 0.5 + i * 0.13, 0, 0.018, 0.025, 0.17, edge);
     const screw = new Mesh(new CylinderGeometry(0.035, 0.035, 0.018, 10), edge);
     screw.rotation.x = Math.PI / 2;
     screw.position.set(side * 0.74, -1.02, 0.145);
@@ -730,7 +799,7 @@ export async function mountCartridgeHero(root) {
     0,
     HERO_GAMES.findIndex((game) => game.slug === root.dataset.selected),
   );
-  let paused = media.matches,
+  let paused = root.dataset.paused === "true" || media.matches,
     manualMotion = false,
     disposed = false,
     seated = root.dataset.phase === "ready";
@@ -771,12 +840,14 @@ export async function mountCartridgeHero(root) {
       phase: root.dataset.phase,
       busy: !!action,
       renderCount,
+      drawCalls: renderer?.info.render.calls ?? 0,
+      triangles: renderer?.info.render.triangles ?? 0,
       disposed,
     }),
   };
 
   function phase(name) {
-    root.dataset.phase = name;
+    if (root.dataset.phase !== name) root.dataset.phase = name;
   }
   function announce(text) {
     if (status.textContent !== text) status.textContent = text;
@@ -785,6 +856,7 @@ export async function mountCartridgeHero(root) {
     const game = HERO_GAMES[selected];
     root.dataset.selected = game.slug;
     root.dataset.motion = paused ? "paused" : "playing";
+    root.dataset.paused = String(paused);
     selectButtons.forEach((button) =>
       button.setAttribute(
         "aria-pressed",
@@ -923,7 +995,7 @@ export async function mountCartridgeHero(root) {
         `${HERO_GAMES[selected].title}. Choose Insert cartridge to bring it to the console.`,
       );
     }
-    placeCards(true);
+    placeCards(paused);
     update();
     wake();
   }
@@ -1064,6 +1136,7 @@ export async function mountCartridgeHero(root) {
     renderer?.forceContextLoss();
     renderer?.domElement.remove();
     root.dataset.heroState = "fallback";
+    root.dataset.controlsOwner = "light";
     if (action) seated = false;
     action = null;
     if (pendingSelection !== null) {
@@ -1137,10 +1210,24 @@ export async function mountCartridgeHero(root) {
       dispose();
       return api;
     }
+    const handoffIndex = HERO_GAMES.findIndex(
+      (game) => game.slug === root.dataset.selected,
+    );
+    if (handoffIndex >= 0) selected = handoffIndex;
+    seated = root.dataset.phase === "ready";
+    paused = root.dataset.paused === "true" || media.matches;
+    phase(seated ? "ready" : "idle");
+    placeCards(true);
+    consoleModel.display(
+      seated ? HERO_GAMES[selected].short : "",
+      seated ? "ready" : "idle",
+    );
+    update();
     renderer.render(scene, camera);
     renderCount++;
     stage.append(canvas);
     root.dataset.heroState = "ready";
+    root.dataset.controlsOwner = "hero";
     announce(
       seated
         ? `${HERO_GAMES[selected].title} is seated. Open Plemu to play.`
