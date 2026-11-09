@@ -801,11 +801,15 @@ export async function mountCartridgeHero(root) {
     if (game) button.style.setProperty("--cartridge-color", game.color);
   });
   const media = matchMedia("(prefers-reduced-motion: reduce)");
+  const readMotionChoice = () =>
+    root.dataset.manualMotion === "true"
+      ? root.dataset.paused === "true"
+      : root.dataset.paused === "true" || media.matches;
   let selected = Math.max(
     0,
     HERO_GAMES.findIndex((game) => game.slug === root.dataset.selected),
   );
-  let paused = root.dataset.paused === "true" || media.matches,
+  let paused = readMotionChoice(),
     manualMotion = root.dataset.manualMotion === "true",
     disposed = false,
     seated = root.dataset.phase === "ready";
@@ -952,7 +956,7 @@ export async function mountCartridgeHero(root) {
     phase("aligning");
     update();
     announce(`Inserting ${HERO_GAMES[selected].title}.`);
-    if (paused || media.matches) finishAction();
+    if (paused) finishAction();
     wake();
   }
   function eject() {
@@ -972,7 +976,7 @@ export async function mountCartridgeHero(root) {
     phase("ejecting");
     update();
     announce("Releasing the cartridge.");
-    if (paused || media.matches) finishAction();
+    if (paused) finishAction();
     wake();
   }
   function finishAction() {
@@ -1222,7 +1226,7 @@ export async function mountCartridgeHero(root) {
     );
     if (handoffIndex >= 0) selected = handoffIndex;
     seated = root.dataset.phase === "ready";
-    paused = root.dataset.paused === "true" || media.matches;
+    paused = readMotionChoice();
     manualMotion = root.dataset.manualMotion === "true";
     phase(seated ? "ready" : "idle");
     placeCards(true);
