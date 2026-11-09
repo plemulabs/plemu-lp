@@ -806,7 +806,7 @@ export async function mountCartridgeHero(root) {
     HERO_GAMES.findIndex((game) => game.slug === root.dataset.selected),
   );
   let paused = root.dataset.paused === "true" || media.matches,
-    manualMotion = false,
+    manualMotion = root.dataset.manualMotion === "true",
     disposed = false,
     seated = root.dataset.phase === "ready";
   let frame = 0,
@@ -1008,6 +1008,7 @@ export async function mountCartridgeHero(root) {
   function pause(value = !paused) {
     if (disposed) return;
     manualMotion = true;
+    root.dataset.manualMotion = "true";
     paused = Boolean(value);
     if (paused && action) finishAction();
     if (paused) placeCards(true);
@@ -1222,6 +1223,7 @@ export async function mountCartridgeHero(root) {
     if (handoffIndex >= 0) selected = handoffIndex;
     seated = root.dataset.phase === "ready";
     paused = root.dataset.paused === "true" || media.matches;
+    manualMotion = root.dataset.manualMotion === "true";
     phase(seated ? "ready" : "idle");
     placeCards(true);
     consoleModel.display(
