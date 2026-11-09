@@ -1,0 +1,44 @@
+{
+  "screens": [
+    {
+      "screen": "discover",
+      "asset": "seeker-discover-current.png",
+      "sha256": "b8bbd36292b8eeaae9f02e0b6acaa722c871b6c83aba992f7e2a0789b347d33c",
+      "width": 1080,
+      "height": 2400,
+      "source": "Actual Plemu Seeker beta native app UI capture",
+      "appVersion": "1.4.8-devnet",
+      "captureMethod": "Unmodified Unity UI render. No mock balance or market values added."
+    },
+    {
+      "screen": "library",
+      "asset": "seeker-library-current.png",
+      "sha256": "96434d306ec6ebb4743b06b79bf453b69d3535c06a060c799066ecb57a33ff82",
+      "width": 1080,
+      "height": 2400,
+      "source": "Actual Plemu Seeker beta native app UI capture",
+      "appVersion": "1.4.8-devnet",
+      "captureMethod": "Unmodified Unity UI render. No mock balance or market values added."
+    },
+    {
+      "screen": "packs",
+      "asset": "seeker-packs-current.png",
+      "sha256": "91d63080f36d273b2671ac3a72208f853c599bed02ccd95729846d89992f725f",
+      "width": 1080,
+      "height": 2400,
+      "source": "Actual Plemu Seeker beta native app UI capture",
+      "appVersion": "1.4.8-devnet",
+      "captureMethod": "Unmodified Unity UI render. No mock balance or market values added."
+    },
+    {
+      "screen": "market",
+      "asset": "seeker-market-current.png",
+      "sha256": "1244c088028df83431871c1b9b6cabdbe22aac41f52c5cbe035f3940f3bb997c",
+      "width": 1080,
+      "height": 2400,
+      "source": "Actual Plemu Seeker beta native app UI capture",
+      "appVersion": "1.4.8-devnet",
+      "captureMethod": "Unmodified Unity UI render. No mock balance or market values added."
+    }
+  ]
+}

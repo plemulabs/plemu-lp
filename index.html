@@ -6,9 +6,12 @@
     <meta name="theme-color" content="#111317" />
     <meta
       name="description"
-      content="Retro play, built for Seeker. Meet Plemu: a home for your local game library and a platform for exploring blockchain technologies."
+      content="Discover retro homebrew, digital cartridges and game communities on Plemu. Native on Solana Seeker, with packs and game-token markets to explore on Devnet."
     />
-    <meta property="og:title" content="Plemu — Retro gaming on Solana Seeker" />
+    <meta
+      property="og:title"
+      content="Plemu — Retro games, digital cartridges &amp; game communities"
+    />
     <meta
       property="og:description"
       content="Retro play, built for Seeker. Discover the Plemu app and explore the Devnet preview."
@@ -26,7 +29,7 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta
       name="twitter:title"
-      content="Plemu — Retro gaming on Solana Seeker"
+      content="Plemu — Retro games, digital cartridges &amp; game communities"
     />
     <meta
       name="twitter:description"
@@ -67,7 +70,9 @@
       type="font/woff2"
       crossorigin
     />
-    <title>Plemu — Retro gaming on Solana Seeker</title>
+    <title>
+      Plemu — Retro games, digital cartridges &amp; game communities
+    </title>
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -82,8 +87,9 @@
               height="1080" /></span
         ></a>
         <nav aria-label="Main navigation">
+          <a href="#collect">Play & collect</a>
+          <a href="#build-together">Build together</a>
           <a href="#the-app">Seeker native</a>
-          <a href="#onchain">Onchain</a>
         </nav>
         <a class="header-cta" href="https://devnet.plemu.xyz"
           >Open Devnet app <span aria-hidden="true">↗</span></a
@@ -94,83 +100,547 @@
       <section class="hero container" aria-labelledby="hero-title">
         <div class="hero-copy">
           <p class="intro">
-            <span class="status-dot" aria-hidden="true"></span> Retro play,
-            built for Seeker.
+            <span class="status-dot" aria-hidden="true"></span> A new life for
+            play.
           </p>
-          <h1 id="hero-title">Your next<br />little escape.</h1>
+          <h1 id="hero-title">Great games.<br />New lives.</h1>
           <p class="hero-description">
-            Old-school worlds. A library that feels like yours. A little room
-            for what comes next.
+            Discover homebrew worlds, collect digital cartridges, and find the
+            community making what comes next.
           </p>
           <div class="hero-actions">
             <a class="button button-primary" href="https://devnet.plemu.xyz"
-              >Explore the Devnet app
+              >Find your next game
               <svg viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M5 12h14m-6-6 6 6-6 6" /></svg
             ></a>
-            <a class="text-link" href="#the-app"
-              >Meet Plemu on Seeker <span aria-hidden="true">↓</span></a
+            <a class="text-link" href="#collect"
+              >A new way to play <span aria-hidden="true">↓</span></a
             >
           </div>
           <p class="hero-note">
-            A testing playground. Test tokens have no monetary value.
+            Explore on Devnet. Take Plemu with you on Seeker.
           </p>
-          <div class="systems" aria-label="Supported local game systems">
+          <div
+            class="systems"
+            aria-label="Supported local game systems and planned additions"
+          >
             <span>Small screen. Big nostalgia.</span>
             <div>
               <span>GB</span><span>GBC</span><span>NES</span><span>GBA</span
-              ><span>SNES</span>
+              ><span>SNES</span
+              ><span class="systems-more"
+                >+MORE<small>in the works</small></span
+              >
             </div>
           </div>
         </div>
-        <div class="hero-visual">
-          <div class="pixel-constellation" aria-hidden="true">
-            <i></i><i></i><i></i><i></i><i></i><i></i>
-          </div>
-          <div class="orbit-word" aria-hidden="true">press<br />pause.</div>
-          <div class="device-stage">
-            <div class="device" aria-label="Plemu Seeker app preview">
-              <div class="device-speaker" aria-hidden="true"></div>
-              <div class="device-screen">
-                <img
-                  id="app-preview"
-                  src="/images/seeker-discover-current.png"
-                  alt="Plemu Seeker beta Discover screen with retro-game library and welcome pack"
-                  width="1080"
-                  height="2400"
-                  fetchpriority="high"
-                />
+        <figure
+          class="hero-visual"
+          aria-label="Interactive homebrew cartridge carousel and Plemu console concept"
+        >
+          <div
+            id="cartridge-arcade"
+            class="ph-arcade"
+            data-cartridge-hero
+            data-hero-state="fallback"
+            data-selected="gb-adjustris"
+            data-phase="browse"
+          >
+            <div class="ph-stage" data-cartridge-stage>
+              <div
+                class="arcade-static"
+                data-cartridge-static
+                aria-hidden="true"
+              >
+                <div class="static-orbit">
+                  <div class="static-cart" data-static-cartridge="gb-adjustris">
+                    <img
+                      src="/hero/adjustris.png"
+                      width="160"
+                      height="144"
+                      alt=""
+                    /><span>Adjustris</span>
+                  </div>
+                  <div
+                    class="static-cart"
+                    data-static-cartridge="gba-2048-advance"
+                  >
+                    <img
+                      src="/hero/2048-advance.png"
+                      width="630"
+                      height="500"
+                      alt=""
+                    /><span>2048 Advance</span>
+                  </div>
+                  <div class="static-cart" data-static-cartridge="gba-spindown">
+                    <img
+                      src="/hero/spindown.png"
+                      width="480"
+                      height="384"
+                      alt=""
+                    /><span>Spindown</span>
+                  </div>
+                  <div class="static-cart" data-static-cartridge="gb-libbet">
+                    <img
+                      src="/hero/libbet.png"
+                      width="160"
+                      height="144"
+                      alt=""
+                    /><span>Libbet</span>
+                  </div>
+                </div>
+                <div class="static-console">
+                  <div class="static-slot"></div>
+                  <div class="static-blocks">
+                    <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+                  </div>
+                  <span class="static-console-word">plemu</span
+                  ><i class="static-led"></i>
+                </div>
               </div>
-              <div class="device-home" aria-hidden="true"></div>
             </div>
-            <div class="play-sticker" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="m8 4 12 8-12 8Z" /></svg
-              ><span>just<br />one more.</span>
+            <div class="arcade-description">
+              <span data-cartridge-title>Adjustris</span
+              ><span data-cartridge-system>Game Boy</span>
             </div>
-            <div class="pixel-buddy" aria-hidden="true">
-              <img
-                src="/brand/plemu-mark.svg"
+            <div
+              class="ph-controls"
+              data-cartridge-controls
+              aria-label="Cartridge carousel controls"
+            >
+              <button
+                type="button"
+                class="ph-arrow"
+                data-cartridge-prev
+                aria-label="Previous cartridge"
+              >
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="m14 6-6 6 6 6" />
+                </svg>
+              </button>
+              <div
+                class="ph-picker"
+                data-cartridge-picker
+                aria-label="Choose a game"
+              >
+                <button
+                  type="button"
+                  class="ph-pick"
+                  data-cartridge-select="gb-adjustris"
+                  data-game-title="Adjustris"
+                  data-game-system="Game Boy"
+                  aria-label="Select Adjustris"
+                  aria-pressed="true"
+                ></button>
+                <button
+                  type="button"
+                  class="ph-pick"
+                  data-cartridge-select="gba-2048-advance"
+                  data-game-title="2048 Advance"
+                  data-game-system="Game Boy Advance"
+                  aria-label="Select 2048 Advance"
+                  aria-pressed="false"
+                ></button>
+                <button
+                  type="button"
+                  class="ph-pick"
+                  data-cartridge-select="gba-spindown"
+                  data-game-title="Spindown"
+                  data-game-system="Game Boy Advance"
+                  aria-label="Select Spindown"
+                  aria-pressed="false"
+                ></button>
+                <button
+                  type="button"
+                  class="ph-pick"
+                  data-cartridge-select="gb-libbet"
+                  data-game-title="Libbet and the Magic Floor"
+                  data-game-system="Game Boy"
+                  aria-label="Select Libbet and the Magic Floor"
+                  aria-pressed="false"
+                ></button>
+              </div>
+              <button
+                type="button"
+                class="ph-arrow"
+                data-cartridge-next
+                aria-label="Next cartridge"
+              >
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="m10 6 6 6-6 6" />
+                </svg>
+              </button>
+              <button type="button" class="ph-insert" data-cartridge-insert>
+                Insert cartridge
+              </button>
+              <button
+                type="button"
+                class="ph-pause"
+                data-cartridge-pause
+                aria-label="Pause cartridge motion"
+                aria-pressed="false"
+              >
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M9 6v12m6-12v12" />
+                </svg>
+              </button>
+            </div>
+            <p class="ph-status" data-cartridge-status aria-live="polite">
+              Choose a cartridge. There’s a world inside.
+            </p>
+          </div>
+          <figcaption class="arcade-caption">
+            Digital games. A little physical ritual.
+            <span>Interactive console concept.</span>
+          </figcaption>
+        </figure>
+      </section>
+      <section
+        class="collection-section"
+        id="collect"
+        aria-labelledby="collection-title"
+      >
+        <div class="container collection-top">
+          <div>
+            <p class="story-label">Play, collect, belong.</p>
+            <h2 id="collection-title">A cartridge.<br />A whole world.</h2>
+          </div>
+          <p class="section-description">
+            The joy of a game on your shelf, built for a digital collection.
+            Plemu connects onchain game tokens with supported experiences, while
+            each creator’s license defines your right to play.
+          </p>
+        </div>
+        <div class="container collection-body">
+          <figure
+            class="collection-art"
+            data-ambient-art
+            aria-label="Illustration of a Plemu pack and digital cartridges"
+          >
+            <div class="collect-orbit collect-orbit-one"></div>
+            <div class="collect-orbit collect-orbit-two"></div>
+            <div class="story-pack">
+              <div class="pack-crimp"></div>
+              <span>plemu</span
+              ><img
+                src="/brand/plemu-pixel-face.png"
+                width="2000"
+                height="2000"
                 alt=""
-                width="105"
-                height="105"
-              />
+              /><strong>A little<br />possibility.</strong>
+              <div class="pack-crimp"></div>
+            </div>
+            <div class="story-cartridge story-cartridge-one">
+              <img
+                src="/hero/libbet.png"
+                width="160"
+                height="144"
+                alt="Libbet and the Magic Floor artwork"
+                loading="lazy"
+              /><span>Libbet</span>
+            </div>
+            <div class="story-cartridge story-cartridge-two">
+              <img
+                src="/hero/2048-advance.png"
+                width="630"
+                height="500"
+                alt="2048 Advance artwork"
+                loading="lazy"
+              /><span>2048 Advance</span>
+            </div>
+            <span class="pixel-spark spark-one" aria-hidden="true"></span
+            ><span class="pixel-spark spark-two" aria-hidden="true"></span>
+            <figcaption>
+              That new-pack feeling. More worlds to discover.
+            </figcaption>
+          </figure>
+          <div class="collection-features">
+            <article>
+              <svg class="story-icon" viewBox="0 0 32 32" aria-hidden="true">
+                <path d="M7 4h18v24H7zM11 4v7h10V4M11 19h10v9H11" />
+              </svg>
+              <div>
+                <h3>Play the complete edition.</h3>
+                <p>
+                  Supported tokens and receipts can establish eligibility for a
+                  game. Each release spells out full-game access, its play
+                  license and any transfer rules.
+                </p>
+              </div>
+            </article>
+            <article>
+              <svg class="story-icon" viewBox="0 0 32 32" aria-hidden="true">
+                <path
+                  d="m5 10 11-6 11 6v13l-11 6-11-6zm0 0 11 6 11-6M16 16v13M10 7l12 6"
+                />
+              </svg>
+              <div>
+                <h3>Make a little discovery.</h3>
+                <p>
+                  Open packs of game-token rewards, find a new favorite and
+                  build your collection. Explore the pack’s contents and
+                  mechanics before approving anything.
+                </p>
+                <a class="inline-link" href="https://devnet.plemu.xyz/packs"
+                  >Explore Devnet packs <span aria-hidden="true">↗</span></a
+                >
+              </div>
+            </article>
+            <article>
+              <svg class="story-icon" viewBox="0 0 32 32" aria-hidden="true">
+                <path
+                  d="M7 24 23 8m-3-3 7 7M6 6v6M3 9h6m15 12v8m-4-4h8M6 24l-1 4 4-1"
+                />
+              </svg>
+              <div>
+                <h3>Change how the world plays.</h3>
+                <p>
+                  Our remix direction brings mods, hacks and expansions
+                  alongside game communities, with clear licenses and compatible
+                  base-game requirements. Remix publishing is in development.
+                </p>
+              </div>
+            </article>
+          </div>
+        </div>
+        <p class="container ownership-note">
+          A token is distinct from a play license. Collecting or trading it does
+          not transfer a game’s copyright or automatically grant rights to
+          redistribute it. Your rights come from the release’s publisher.
+        </p>
+      </section>
+      <section
+        class="lifecycle-section"
+        id="build-together"
+        aria-labelledby="lifecycle-title"
+      >
+        <div class="container lifecycle-heading">
+          <div>
+            <p class="story-label">The next chapter, together.</p>
+            <h2 id="lifecycle-title">Good games don’t<br />end at launch.</h2>
+          </div>
+          <div>
+            <p class="section-description">
+              A public token raise can do more than support a first build. It
+              can gather a community that stays for the demo, the updates and
+              the next big idea.
+            </p>
+            <span class="direction-label"
+              ><i aria-hidden="true"></i> Our direction · in development</span
+            >
+          </div>
+        </div>
+        <div class="container lifecycle-body">
+          <div
+            class="lifecycle-world"
+            data-lifecycle-world="0"
+            data-ambient-art
+            aria-hidden="true"
+          >
+            <div class="world-grid"></div>
+            <div class="voxel-ground">
+              <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i
+              ><i></i><i></i><i></i>
+            </div>
+            <div class="voxel-tower tower-one"><i></i><i></i><i></i></div>
+            <div class="voxel-tower tower-two"><i></i><i></i><i></i></div>
+            <div class="voxel-flag"><i></i></div>
+            <span class="world-word" data-world-word>A first build.</span
+            ><span class="world-caption"
+              >Small beginnings. Shared possibilities.</span
+            >
+          </div>
+          <ol
+            class="lifecycle-steps"
+            aria-label="Game community development model"
+          >
+            <li>
+              <button type="button" data-lifecycle-step="0" aria-pressed="true">
+                <span class="step-number">01</span
+                ><span
+                  ><strong>Put a build in players’ hands.</strong
+                  ><span
+                    >A demo, an original game, an authorized remix. Start with
+                    something people can understand and play.</span
+                  ></span
+                ><svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="m9 5 7 7-7 7" />
+                </svg>
+              </button>
+            </li>
+            <li>
+              <button
+                type="button"
+                data-lifecycle-step="1"
+                aria-pressed="false"
+              >
+                <span class="step-number">02</span
+                ><span
+                  ><strong>Let a community form in public.</strong
+                  ><span
+                    >A game-token raise brings onchain participation into view,
+                    with a clear development plan and token mechanics.</span
+                  ></span
+                ><svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="m9 5 7 7-7 7" />
+                </svg>
+              </button>
+            </li>
+            <li>
+              <button
+                type="button"
+                data-lifecycle-step="2"
+                aria-pressed="false"
+              >
+                <span class="step-number">03</span
+                ><span
+                  ><strong>Build toward the next milestone.</strong
+                  ><span
+                    >New levels, a balance pass, a fuller release. Creators and
+                    contributors keep developing through the game’s
+                    lifecycle.</span
+                  ></span
+                ><svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="m9 5 7 7-7 7" />
+                </svg>
+              </button>
+            </li>
+            <li>
+              <button
+                type="button"
+                data-lifecycle-step="3"
+                aria-pressed="false"
+              >
+                <span class="step-number">04</span
+                ><span
+                  ><strong>Let outcomes shape what’s next.</strong
+                  ><span
+                    >Our futarchy-inspired direction explores markets around
+                    development proposals and shared outcomes, adapted to the
+                    decisions a game community makes.</span
+                  ></span
+                ><svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="m9 5 7 7-7 7" />
+                </svg>
+              </button>
+            </li>
+          </ol>
+        </div>
+        <div class="container lifecycle-bottom">
+          <p>
+            Today: game-token markets and lifecycle stages on Devnet. Creator
+            launches, collaborative development and futarchy tools are planned.
+          </p>
+          <a class="inline-link" href="https://devnet.plemu.xyz/market"
+            >Meet the game markets <span aria-hidden="true">↗</span></a
+          >
+        </div>
+      </section>
+      <section
+        class="remix-section container"
+        id="remix"
+        aria-labelledby="remix-title"
+      >
+        <div class="remix-heading">
+          <p class="story-label">Same roots. Different worlds.</p>
+          <h2 id="remix-title">What could you<br />make of it?</h2>
+          <p class="section-description">
+            Our growing research roster brings decompilations, disassemblies and
+            rebuild projects into view. A starting point for communities to
+            study, modify and turn into original or authorized experiences.
+          </p>
+        </div>
+        <figure class="remix-art" data-remix-art="world" data-ambient-art>
+          <div class="remix-comparison">
+            <div class="mini-world mini-world-original">
+              <span class="mini-world-label">A starting point</span>
+              <div class="mini-moon"></div>
+              <div class="mini-mountains"></div>
+              <div class="mini-ground"></div>
+              <div class="mini-player"></div>
+            </div>
+            <div class="mini-world mini-world-remix">
+              <span class="mini-world-label">Your next idea</span>
+              <div class="mini-moon"></div>
+              <div class="mini-mountains"></div>
+              <div class="mini-ground"></div>
+              <div class="mini-player"></div>
+              <i class="mini-star"></i>
             </div>
           </div>
           <div
-            class="preview-control"
+            class="remix-switches"
             role="group"
-            aria-label="Choose app preview"
+            aria-label="Explore remix possibilities"
           >
-            <button type="button" data-screen="discover" aria-pressed="true">
-              Discover</button
-            ><button type="button" data-screen="library" aria-pressed="false">
-              Library
+            <button type="button" data-remix-choice="world" aria-pressed="true">
+              New worlds</button
+            ><button
+              type="button"
+              data-remix-choice="rules"
+              aria-pressed="false"
+            >
+              New rules</button
+            ><button
+              type="button"
+              data-remix-choice="characters"
+              aria-pressed="false"
+            >
+              New characters
             </button>
           </div>
-          <p class="preview-caption" id="preview-caption" aria-live="polite">
-            Seeker beta app preview
-          </p>
+          <figcaption data-remix-caption aria-live="polite">
+            Reimagine a level, a setting or an entire journey. An illustration
+            of remix possibilities.
+          </figcaption>
+        </figure>
+        <div class="source-shelf">
+          <div class="source-intro">
+            <h3>A growing shelf<br />of starting points.</h3>
+            <p>
+              Explore independent upstream projects from our research roster.
+            </p>
+          </div>
+          <a
+            href="https://github.com/pret/pokeemerald"
+            target="_blank"
+            rel="noopener noreferrer"
+            ><span class="source-symbol" aria-hidden="true">{ }</span
+            ><span
+              ><strong>Pokémon Emerald</strong
+              ><small>GBA · Decompilation</small></span
+            ><svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M6 18 18 6M6 6h12v12" /></svg></a
+          ><a
+            href="https://github.com/pret/pokefirered"
+            target="_blank"
+            rel="noopener noreferrer"
+            ><span class="source-symbol" aria-hidden="true">{ }</span
+            ><span
+              ><strong>FireRed / LeafGreen</strong
+              ><small>GBA · Decompilation</small></span
+            ><svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M6 18 18 6M6 6h12v12" /></svg></a
+          ><a
+            href="https://github.com/IsoFrieze/SMWDisX"
+            target="_blank"
+            rel="noopener noreferrer"
+            ><span class="source-symbol" aria-hidden="true">&lt;/&gt;</span
+            ><span
+              ><strong>SMW Disassembly X</strong
+              ><small>SNES · Disassembly</small></span
+            ><svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M6 18 18 6M6 6h12v12" /></svg
+          ></a>
         </div>
+        <p class="source-note">
+          Independent research projects, not Plemu-distributed editions. Check
+          each project’s code, assets, original-game rights and build
+          requirements before sharing. Source availability alone is not a
+          redistribution license. Remix tooling and publishing are in
+          development.
+        </p>
       </section>
       <section
         class="seeker-section"
@@ -238,7 +708,7 @@
                 ><i aria-hidden="true"></i> Plemu, on Seeker.</span
               >
             </div>
-            <div class="seeker-controls" data-seeker-controls hidden>
+            <div class="seeker-controls" data-seeker-controls>
               <div
                 class="seeker-screens"
                 role="group"
@@ -255,15 +725,28 @@
                   data-seeker-screen="library"
                   aria-pressed="false"
                 >
-                  Library
+                  Library</button
+                ><button
+                  type="button"
+                  data-seeker-screen="packs"
+                  aria-pressed="false"
+                >
+                  Packs</button
+                ><button
+                  type="button"
+                  data-seeker-screen="market"
+                  aria-pressed="false"
+                >
+                  Market
                 </button>
               </div>
-              <button type="button" class="seeker-turn" data-seeker-turn>
+              <button type="button" class="seeker-turn" data-seeker-turn hidden>
                 Turn Seeker <span aria-hidden="true">↻</span>
               </button>
               <button
                 type="button"
                 class="seeker-motion"
+                hidden
                 data-seeker-motion
                 aria-pressed="false"
                 aria-label="Pause Seeker animation"
@@ -343,26 +826,26 @@
         aria-labelledby="onchain-title"
       >
         <div class="onchain-heading">
-          <p class="section-kicker">A little room for what’s next.</p>
-          <h2 id="onchain-title">Play meets<br />possibility.</h2>
+          <p class="story-label">There’s more inside.</p>
+          <h2 id="onchain-title">
+            Find your people.<br />Find your next world.
+          </h2>
         </div>
         <div class="onchain-copy">
           <p>
-            Plemu builds blockchain software and interfaces. Explore token
-            features in our Devnet web app, with test funds and room to
-            experiment.
+            Play locally. Explore packs and game tokens. Start with what’s live,
+            and help imagine what comes next.
           </p>
-          <p class="muted">
-            Tokens are separate from game licenses, ROMs and copyright. Plemu
-            does not provide hosted asset custody or customer KYC onboarding.
-          </p>
-          <a class="button button-outline" href="https://devnet.plemu.xyz"
-            >Enter the Devnet playground
+          <a class="button button-primary" href="https://devnet.plemu.xyz"
+            >Enter the Devnet app
             <svg viewBox="0 0 24 24" aria-hidden="true">
               <path d="M5 12h14m-6-6 6 6-6 6" /></svg></a
           ><span class="test-note"
-            >Web preview and Seeker beta are separate experiences.</span
+            >Devnet uses test funds with no monetary value.</span
           >
+        </div>
+        <div class="onchain-pixels" aria-hidden="true">
+          <i></i><i></i><i></i><i></i><i></i><i></i>
         </div>
       </section>
     </main>
@@ -377,7 +860,7 @@
                 width="1920"
                 height="1080" /></span
           ></a>
-          <p>A little escape goes a long way.</p>
+          <p>More ways to play. More reasons to stay.</p>
           <a href="mailto:support@plemu.xyz"
             >Say hello <span aria-hidden="true">↗</span></a
           >
@@ -391,12 +874,31 @@
           </nav>
         </div>
         <p class="footer-disclosure">
-          Blockchain technology, thoughtfully explored. Test environments are
-          experimental. Third-party games and software retain their own
-          licenses.
+          Plemu Labs LLC provides blockchain software and interfaces. Tokens and
+          game licenses are separate. We do not provide hosted asset custody,
+          customer KYC onboarding or a securities exchange. Third-party games
+          and software retain their own licenses.
         </p>
       </div>
     </footer>
+    <noscript
+      ><style>
+        .ph-controls,
+        .seeker-controls,
+        .remix-switches {
+          display: none !important;
+        }
+        .lifecycle-steps button {
+          cursor: default;
+        }
+      </style>
+      <div class="container noscript-previews">
+        <a href="/images/seeker-packs-current.png">View native Packs screen</a
+        ><a href="/images/seeker-market-current.png"
+          >View native Market screen</a
+        >
+      </div></noscript
+    >
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>

@@ -4,14 +4,14 @@
 
 ## Controls and rendering
 
-- Discover and Library select the actual Plemu beta screenshots in [public/images](../public/images/). The Library texture loads on first selection and is retained for later switches. A failed load keeps the current screen and can be retried. Late loads never replace a newer selection.
+- Discover, Library, Packs and Market select the actual Plemu beta screenshots in [public/images](../public/images/). Each additional texture loads on first selection and is retained. A failed load keeps the current screen and can be retried. Late loads never replace a newer selection or orientation input. A selection made before the 3D module finishes loading is retained.
 - Turn Seeker shows the front or back; pointer dragging changes orientation.
 - The motion button pauses or resumes animation. Reduced motion starts paused.
 - Rendering stops when the section leaves the viewport or the document is hidden. Page teardown releases GPU resources.
-- Without JavaScript or WebGL, or with data saver enabled, the static app preview remains visible.
+- Without WebGL, or with data saver enabled, the screen selector works with a static handset. Without JavaScript, static imagery and direct Packs/Market screenshot links remain available. Context loss returns to the static selector.
 
-The base script is about 3 KB minified. The separately loaded viewer is about 148 KB gzip. Pixel ratio is capped at 1.5 on narrow screens and 1.75 elsewhere.
+The hero and handset share the dynamically loaded Three.js environment code. Pixel ratio is capped at 1.5 on narrow screens and 1.75 elsewhere. The hero is a separate component; no second handset appears there.
 
 ## Model and image sources
 
-The illustrative model follows the [Solana Mobile Seeker](https://solanamobile.com/seeker) silhouette and approximate 73.5 × 154.8 × 9.3 mm dimensions. It is original procedural geometry rather than manufacturer CAD. Screen textures are unchanged Plemu beta captures with the current brand mark. Three.js uses its [MIT license](../public/licenses/three-MIT.txt).
+The illustrative model follows the [Solana Mobile Seeker](https://solanamobile.com/seeker) silhouette and approximate 73.5 × 154.8 × 9.3 mm dimensions. It is original procedural geometry. Screen textures are unchanged Plemu beta captures with the current brand mark; [source hashes](../public/images/seeker-screen-sources.json) describe all four. Three.js uses its [MIT license](../public/licenses/three-MIT.txt).

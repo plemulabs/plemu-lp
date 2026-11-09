@@ -31,10 +31,12 @@ npm run build
 
 Both projects build independently. `PLEMU_LEGAL_SOURCE` provides an explicit build-time source override. The policy's draft status and effective date are rendered from the document. Final publication requires counsel review and confirmation of contact and provider details.
 
-## Assets and Seeker viewer
+## Page and interactive previews
 
-Primary logos are in [public/brand](public/brand/); app captures are in [public/images](public/images/). The previous mark remains a decorative asset. Fonts and Three.js retain their [licenses](public/licenses/).
+The hero's [cartridge carousel](docs/cartridge-hero.md) uses original block-console geometry and four real homebrew games. The collection, development-model and source-project sections explain live features and planned community/remix tools separately. Tokens and publisher-defined play licenses remain distinct.
 
-The [Seeker viewer](docs/seeker-showcase.md) uses original illustrative geometry and actual Plemu beta screens. It supports turning, dragging, screen selection and motion controls. The viewer loads near its section, stops rendering offscreen, and respects reduced motion. Static app imagery remains available without JavaScript or WebGL and with data saver enabled.
+Primary logos are in [public/brand](public/brand/); app captures are in [public/images](public/images/). Fonts and Three.js retain their [licenses](public/licenses/). Cartridge artwork, credits and notices are in [public/hero](public/hero/).
+
+The separate [Seeker viewer](docs/seeker-showcase.md) supports Discover, Library, Packs and Market views, turning, dragging and motion controls. Both scenes load near their sections, share Three.js, stop rendering offscreen and respect reduced motion. With JavaScript but no WebGL or with data saver, lightweight controls remain usable. Without JavaScript, the complete page, static artwork, source links, screen links and legal pages remain available.
 
 [Source provenance](SOURCE.md) lists the upstream project and asset locations.

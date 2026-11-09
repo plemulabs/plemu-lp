@@ -480,3 +480,30 @@
 .seeker-showcase [hidden] {
   display: none;
 }
+.seeker-controls .seeker-screens {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 2px;
+  max-width: 100%;
+  min-width: 0;
+}
+.seeker-controls .seeker-screens button {
+  min-width: 0;
+  padding-inline: 11px;
+}
+.seeker-showcase {
+  min-width: 0;
+}
+@media (max-width: 480px) {
+  .seeker-controls {
+    gap: 8px;
+  }
+  .seeker-controls .seeker-screens {
+    width: 100%;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  .seeker-controls .seeker-screens button {
+    padding-inline: 6px;
+    font-size: 10px;
+  }
+}

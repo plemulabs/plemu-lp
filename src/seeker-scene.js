@@ -35,6 +35,14 @@ const screens = {
     src: "/images/seeker-library-current.png",
     alt: "Plemu installed on Seeker, showing its native beta Library screen",
   },
+  packs: {
+    src: "/images/seeker-packs-current.png",
+    alt: "Plemu installed on Seeker, showing its native beta Packs screen",
+  },
+  market: {
+    src: "/images/seeker-market-current.png",
+    alt: "Plemu installed on Seeker, showing its native beta Market screen",
+  },
 };
 
 function outline(width, height, radius) {
@@ -337,7 +345,9 @@ export async function mountSeeker(root) {
     renderer.forceContextLoss();
     canvas.remove();
     root.dataset.scene = "fallback";
-    controls.hidden = true;
+    controls.removeAttribute("aria-busy");
+    root.querySelector("[data-seeker-turn]").hidden = true;
+    root.querySelector("[data-seeker-motion]").hidden = true;
     root.querySelector("[data-seeker-hint]").hidden = true;
   }
   try {
@@ -362,13 +372,24 @@ export async function mountSeeker(root) {
       }
       return pendingTextures.get(name);
     }
-    await loadScreen("discover");
+    let initialScreen = screens[root.dataset.screen]
+      ? root.dataset.screen
+      : "discover";
+    await loadScreen(initialScreen);
     await document.fonts.ready;
-    if (!root.isConnected) {
+    while (
+      !disposed &&
+      screens[root.dataset.screen] &&
+      root.dataset.screen !== initialScreen
+    ) {
+      initialScreen = root.dataset.screen;
+      await loadScreen(initialScreen);
+    }
+    if (disposed || !root.isConnected) {
       dispose();
       return;
     }
-    const model = createPhone(textures.discover);
+    const model = createPhone(textures[initialScreen]);
     phone = model.phone;
     phone.rotation.set(0.1, paused ? FRONT : 0.95, -0.105);
     scene.add(phone);
@@ -424,6 +445,7 @@ export async function mountSeeker(root) {
       button.addEventListener(
         "click",
         async () => {
+          if (root.dataset.scene !== "ready") return;
           const name = button.dataset.seekerScreen;
           if (!screens[name]) return;
           const selection = ++screenSelection;
@@ -437,6 +459,7 @@ export async function mountSeeker(root) {
             const texture = await loadScreen(name);
             if (disposed || selection !== screenSelection) return;
             model.screenMaterial.map = texture;
+            root.dataset.screen = name;
             fallback.src = screens[name].src;
             fallback.alt = screens[name].alt;
             root
@@ -562,10 +585,20 @@ export async function mountSeeker(root) {
     setSize();
     await renderer.compileAsync(scene, camera);
     if (disposed) return;
+    while (
+      screens[root.dataset.screen] &&
+      root.dataset.screen !== initialScreen
+    ) {
+      initialScreen = root.dataset.screen;
+      model.screenMaterial.map = await loadScreen(initialScreen);
+      if (disposed) return;
+    }
     canvas.setAttribute("aria-hidden", "true");
     holder.append(canvas);
     root.dataset.scene = "ready";
     controls.hidden = false;
+    root.querySelector("[data-seeker-turn]").hidden = false;
+    root.querySelector("[data-seeker-motion]").hidden = false;
     root.querySelector("[data-seeker-hint]").hidden = false;
     updateMotionControl();
     wake();
