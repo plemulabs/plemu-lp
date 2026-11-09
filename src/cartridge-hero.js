@@ -794,6 +794,12 @@ export async function mountCartridgeHero(root) {
       picker.append(button);
     });
   const selectButtons = root.querySelectorAll("[data-cartridge-select]");
+  selectButtons.forEach((button) => {
+    const game = HERO_GAMES.find(
+      (item) => item.slug === button.dataset.cartridgeSelect,
+    );
+    if (game) button.style.setProperty("--cartridge-color", game.color);
+  });
   const media = matchMedia("(prefers-reduced-motion: reduce)");
   let selected = Math.max(
     0,
