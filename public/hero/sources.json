@@ -1,0 +1,48 @@
+{
+  "assets": [
+    {
+      "file": "adjustris.png",
+      "title": "Adjustris",
+      "creator": "Dave VanEe (tbsp)",
+      "source": "https://github.com/tbsp/Adjustris/tree/b1ac0b219725cc58c5e8c5fce231534e895062e8",
+      "license": "CC0; see source LICENSE.md and preserved third-party source-unit notices",
+      "kind": "Unmodified native title/game capture already used in Plemu",
+      "sha256": "be11e058c0b0cca3fedb135411ebc570cad3455263cb92322944c39593314e40",
+      "bytes": 2386
+    },
+    {
+      "file": "2048-advance.png",
+      "title": "2048 Advance",
+      "creator": "Basil Termini (Paperdomo101)",
+      "source": "https://basil-termini.itch.io/2048-advance",
+      "artSource": "https://img.itch.zone/aW1nLzE3MzgwMzUzLnBuZw==/original/5m6194.png",
+      "license": "Game code and graphics CC0; source https://github.com/Paperdomo101/2048-GBA/tree/ae36800dfa1314f96c4c8785b5c2d077fb731aff",
+      "kind": "Unmodified author artwork already used in Plemu",
+      "sha256": "7aedc6ce843b3b8ae1b0aaf4d9f484e0d466b62e53a99ed4119f6d0d2f2b8f71",
+      "bytes": 229658
+    },
+    {
+      "file": "spindown.png",
+      "title": "Spindown",
+      "creator": "Chris Pickel (sfiera)",
+      "source": "https://github.com/sfiera/spindown",
+      "artSource": "https://img.itch.zone/aW1nLzI5ODcyNjAwLnBuZw==/original/jOwMkU.png",
+      "license": "MIT; see spindown-MIT.txt",
+      "kind": "Unmodified author artwork already used in Plemu",
+      "sha256": "78e9a00bc9be56dbed977ad66934872c9dfdb52fa4eac05de11d017caeee6975",
+      "bytes": 4044
+    },
+    {
+      "file": "libbet.png",
+      "title": "Libbet and the Magic Floor",
+      "creator": "Damian Yerrick (pinobatch)",
+      "source": "https://github.com/pinobatch/libbet",
+      "license": "zlib; see libbet-zlib.txt",
+      "kind": "Unmodified gameplay capture from the native app Brand/LibbetCover.png; not the AI-assisted presentation cover",
+      "sha256": "97a920fc94cd4e5ca8654a0f9452595da4131b8881416e8e1ad56dc45786db64",
+      "bytes": 1448
+    }
+  ],
+  "geometry": "Original procedural Plemu console and generic cartridge geometry; not manufacturer CAD or a physical product offer",
+  "includesGameBinaries": false
+}
