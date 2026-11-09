@@ -38,11 +38,13 @@
       "creator": "Damian Yerrick (pinobatch)",
       "source": "https://github.com/pinobatch/libbet",
       "license": "zlib; see libbet-zlib.txt",
-      "kind": "Unmodified gameplay capture from the native app Brand/LibbetCover.png; not the AI-assisted presentation cover",
-      "sha256": "97a920fc94cd4e5ca8654a0f9452595da4131b8881416e8e1ad56dc45786db64",
-      "bytes": 1448
+      "kind": "Unmodified native app presentation cover. Plemu AI-assisted illustration guided by Damian Yerrick artwork; source and creator credit retained.",
+      "sha256": "a64eba3b3275b3e9ee717ecd145606c1ca12e94222c0659cf2c1231e784df529",
+      "bytes": 2187023,
+      "nativeAsset": "HomebrewCovers/a64eba3b3275b3e9ee717ecd145606c1ca12e94222c0659cf2c1231e784df529",
+      "artSource": "https://github.com/pinobatch/libbet/tree/1232e71dc1ac852786ad9825316e19d2b341bc4a/07-biggar"
     }
   ],
-  "geometry": "Original procedural Plemu console and generic cartridge geometry; not manufacturer CAD or a physical product offer",
+  "geometry": "Plemu native ConsoleCartridgeProfile proportions, eight-point outline, system colors, cover layout and nine contacts; original Plemu block console.",
   "includesGameBinaries": false
 }

@@ -28,58 +28,15 @@ import {
   WebGLRenderer,
 } from "three";
 import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
+import { bindCartridgeInput } from "./cartridge-input.js";
 
-export const HERO_GAMES = Object.freeze([
-  Object.freeze({
-    slug: "gb-adjustris",
-    title: "Adjustris",
-    short: "Adjustris",
-    system: "Game Boy",
-    code: "GB",
-    author: "Dave VanEe",
-    cover: "/hero/adjustris.png",
-    color: "#b7d83c",
-    shell: 0xcfd7b2,
-  }),
-  Object.freeze({
-    slug: "gba-2048-advance",
-    title: "2048 Advance",
-    short: "2048 Advance",
-    system: "Game Boy Advance",
-    code: "GBA",
-    author: "Basil Termini",
-    cover: "/hero/2048-advance.png",
-    color: "#e9ad6a",
-    shell: 0xd6b9a0,
-  }),
-  Object.freeze({
-    slug: "gba-spindown",
-    title: "Spindown",
-    short: "Spindown",
-    system: "Game Boy Advance",
-    code: "GBA",
-    author: "Chris Pickel",
-    cover: "/hero/spindown.png",
-    color: "#ad9aef",
-    shell: 0xb5a9d8,
-  }),
-  Object.freeze({
-    slug: "gb-libbet",
-    title: "Libbet and the Magic Floor",
-    short: "Libbet",
-    system: "Game Boy",
-    code: "GB",
-    author: "Damian Yerrick",
-    cover: "/hero/libbet.png",
-    color: "#91cad3",
-    shell: 0xb6ced0,
-  }),
-]);
+import { CARTRIDGE_GAMES as HERO_GAMES } from "./cartridge-catalog.js";
+export { CARTRIDGE_GAMES as HERO_GAMES } from "./cartridge-catalog.js";
 
 const SLOT = new Vector3(0, 0.76, -0.35);
 const ALIGN = new Vector3(0, 3.4, -0.35);
-const INSERT_SECONDS = 3.35;
-const EJECT_SECONDS = 1.55;
+const INSERT_SECONDS = 1.15;
+const EJECT_SECONDS = 0.48;
 const smooth = (t) => t * t * (3 - 2 * t);
 const clamp = (t) => MathUtils.clamp(t, 0, 1);
 
@@ -168,6 +125,8 @@ function wordMap(
 function textPlate(parent, text, x, y, z, width, height, color, background) {
   const material = new MeshBasicMaterial({
     map: wordMap(text, color, background),
+    transparent: background === "#00000000",
+    depthWrite: background !== "#00000000",
     toneMapped: false,
   });
   const plate = new Mesh(new PlaneGeometry(width, height), material);
@@ -531,115 +490,104 @@ function createConsole() {
 function createCartridge(game, index) {
   const group = new Group();
   group.userData.gameIndex = index;
-  const shellMaterial = new MeshPhysicalMaterial({
+  const shell = new MeshPhysicalMaterial({
     color: game.shell,
-    metalness: 0.15,
-    roughness: 0.42,
-    clearcoat: 0.5,
-    clearcoatRoughness: 0.35,
+    metalness: 0.12,
+    roughness: 0.4,
+    clearcoat: 0.3,
   });
-  const dark = new MeshStandardMaterial({
-    color: 0x262c30,
-    roughness: 0.45,
-    metalness: 0.4,
-  });
-  const edge = new MeshStandardMaterial({
-    color: 0x738073,
-    roughness: 0.42,
-    metalness: 0.6,
-  });
+  const trim = new MeshStandardMaterial({ color: game.trim, roughness: 0.45 });
   const gold = new MeshStandardMaterial({
-    color: 0xcbb76b,
-    roughness: 0.38,
-    metalness: 0.82,
+    color: 0xb3974a,
+    metalness: 0.65,
+    roughness: 0.4,
   });
-  const body = slab(1.99, 2.56, 0.24, 0.13, shellMaterial);
-  group.add(body);
-  const lip = slab(2.025, 0.23, 0.29, 0.05, shellMaterial);
-  lip.position.y = 1.1;
-  group.add(lip);
-  const labelBase = slab(1.71, 1.89, 0.022, 0.07, dark);
-  labelBase.position.set(0, 0.12, 0.151);
-  group.add(labelBase);
+  const outline = [
+    [0, 0.04],
+    [0, 0.96],
+    [0.04, 1],
+    [0.96, 1],
+    [1, 0.96],
+    [1, 0.04],
+    [0.96, 0],
+    [0.04, 0],
+  ];
+  const shape = new Shape();
+  outline.forEach(([x, y], i) => {
+    const px = (x - 0.5) * 1.928,
+      py = (y - 0.5) * 2.328;
+    if (i === 0) shape.moveTo(px, py);
+    else shape.lineTo(px, py);
+  });
+  shape.closePath();
+  const geometry = new ExtrudeGeometry(shape, {
+    depth: 0.124,
+    bevelEnabled: true,
+    bevelSize: 0.036,
+    bevelThickness: 0.028,
+    bevelSegments: 1,
+    steps: 1,
+  });
+  geometry.translate(0, 0, -0.062);
+  group.add(new Mesh(geometry, [shell, trim]));
+  const labelBase = box(group, 0, 0.024, 0.096, 1.812, 1.944, 0.012, trim);
+  labelBase.name = "Native cover recess";
   const artMaterial = new MeshBasicMaterial({
-    map: wordMap(game.short, game.color, "#171d22", 320, 288),
+    map: wordMap(game.short, game.accent, "#171d22", 320, 384),
     toneMapped: false,
   });
-  const art = new Mesh(new PlaneGeometry(1.5, 1.35), artMaterial);
-  art.position.set(0, 0.14, 0.198);
+  const art = new Mesh(new PlaneGeometry(1.74, 1.872), artMaterial);
+  art.position.set(0, 0.024, 0.119);
   group.add(art);
   textPlate(
     group,
-    game.short,
+    game.system,
     0,
-    0.96,
-    0.199,
-    1.46,
-    0.18,
-    "#e5e8d7",
-    "#21262a",
+    1.073,
+    0.122,
+    1.66,
+    0.12,
+    game.accent,
+    "#00000000",
   );
-  textPlate(
-    group,
-    "plemu / " + game.code,
-    0,
-    -0.72,
-    0.199,
-    1.46,
-    0.16,
-    game.color,
-    "#21262a",
-  );
-  const connector = slab(1.5, 0.18, 0.2, 0.02, dark);
-  connector.position.y = -1.285;
-  group.add(connector);
   repeatedBoxes(
     group,
-    Array.from({ length: 10 }, (_, i) => [
-      -0.63 + i * 0.14,
-      -1.3,
-      0.12,
-      0.062,
-      0.15,
-      0.025,
+    Array.from({ length: 9 }, (_, i) => [
+      -0.6 + i * 0.138,
+      -1.044,
+      0.101,
+      0.076,
+      0.144,
+      0.008,
     ]),
     gold,
   );
   repeatedBoxes(
     group,
-    [-1, 1].flatMap((side) =>
-      Array.from({ length: 3 }, (_, i) => [
-        side * 1.011,
-        0.5 + i * 0.13,
-        0,
-        0.018,
-        0.025,
-        0.17,
-      ]),
-    ),
-    edge,
+    Array.from({ length: 3 }, (_, i) => [
+      -0.938,
+      (-0.24 + i * 0.12) * 2.4,
+      0.101,
+      0.044,
+      0.06,
+      0.008,
+    ]),
+    trim,
   );
-  for (const side of [-1, 1]) {
-    const screw = new Mesh(new CylinderGeometry(0.035, 0.035, 0.018, 10), edge);
-    screw.rotation.x = Math.PI / 2;
-    screw.position.set(side * 0.74, -1.02, 0.145);
-    group.add(screw);
-  }
-  const backPlaque = slab(1.62, 1.12, 0.018, 0.045, dark);
-  backPlaque.position.set(0, -0.05, -0.141);
-  group.add(backPlaque);
-  const backTitle = textPlate(
+  const back = box(group, 0, 0, -0.103, 1.76, 1.92, 0.014, trim);
+  back.name = "Native metadata back";
+  const print = textPlate(
     group,
-    game.code + " cartridge",
+    game.short,
     0,
     0,
-    -0.185,
-    1.4,
-    0.24,
-    "#c8cebc",
-    "#21262a",
+    -0.119,
+    1.5,
+    0.3,
+    "#e8e9ed",
+    "#292e4f",
   );
-  backTitle.rotation.y = Math.PI;
+  print.rotation.y = Math.PI;
   return { group, art, artMaterial };
 }
 
@@ -725,81 +673,12 @@ export function insertionPose(start, progress) {
   };
 }
 
-function ensure(root, attribute, tag, className, text) {
-  let element = root.querySelector(`[${attribute}]`);
-  if (!element) {
-    element = document.createElement(tag);
-    element.setAttribute(attribute, "");
-    element.className = className;
-    if (text) element.textContent = text;
-    root.append(element);
-  }
-  return element;
-}
-
 export async function mountCartridgeHero(root) {
   if (!root) return;
-  const stage = ensure(root, "data-cartridge-stage", "div", "ph-stage");
-  const controls = ensure(
-    root,
-    "data-cartridge-controls",
-    "div",
-    "ph-controls",
-  );
-  const status = ensure(root, "data-cartridge-status", "p", "ph-status");
-  status.setAttribute("aria-live", "polite");
-  const prev = ensure(
-    controls,
-    "data-cartridge-prev",
-    "button",
-    "ph-arrow",
-    "←",
-  );
-  const next = ensure(
-    controls,
-    "data-cartridge-next",
-    "button",
-    "ph-arrow",
-    "→",
-  );
-  const picker = ensure(controls, "data-cartridge-picker", "div", "ph-picker");
-  const insertButton = ensure(
-    controls,
-    "data-cartridge-insert",
-    "button",
-    "ph-insert",
-    "Insert cartridge",
-  );
-  const pauseButton = ensure(
-    controls,
-    "data-cartridge-pause",
-    "button",
-    "ph-pause",
-    "Pause motion",
-  );
-  prev.setAttribute("aria-label", "Previous cartridge");
-  next.setAttribute("aria-label", "Next cartridge");
-  for (const button of [prev, next, insertButton, pauseButton])
-    button.type = "button";
-  if (!picker.querySelector("[data-cartridge-select]"))
-    HERO_GAMES.forEach((game) => {
-      const button = document.createElement("button");
-      button.type = "button";
-      button.dataset.cartridgeSelect = game.slug;
-      button.className = "ph-pick";
-      button.setAttribute("aria-label", `Select ${game.title}`);
-      button.title = game.title;
-      button.style.setProperty("--cartridge-color", game.color);
-      button.textContent = game.short;
-      picker.append(button);
-    });
-  const selectButtons = root.querySelectorAll("[data-cartridge-select]");
-  selectButtons.forEach((button) => {
-    const game = HERO_GAMES.find(
-      (item) => item.slug === button.dataset.cartridgeSelect,
-    );
-    if (game) button.style.setProperty("--cartridge-color", game.color);
-  });
+  const stage = root.querySelector("[data-cartridge-stage]");
+  const status = root.querySelector("[data-cartridge-status]");
+  const pauseButton = root.querySelector("[data-cartridge-pause]");
+  const staticCards = root.querySelectorAll("[data-static-cartridge]");
   const media = matchMedia("(prefers-reduced-motion: reduce)");
   const readMotionChoice = () =>
     root.dataset.manualMotion === "true"
@@ -820,7 +699,7 @@ export async function mountCartridgeHero(root) {
     renderCount = 0;
   let pendingSelection = null,
     action = null,
-    pointer = null;
+    pendingInsert = false;
   let renderer,
     environment,
     cards = [],
@@ -867,44 +746,23 @@ export async function mountCartridgeHero(root) {
     root.dataset.selected = game.slug;
     root.dataset.motion = paused ? "paused" : "playing";
     root.dataset.paused = String(paused);
-    selectButtons.forEach((button) =>
-      button.setAttribute(
-        "aria-pressed",
-        String(button.dataset.cartridgeSelect === game.slug),
+    staticCards.forEach((card) =>
+      card.classList.toggle(
+        "is-selected",
+        card.dataset.staticCartridge === game.slug,
       ),
     );
-    const title = root.querySelector("[data-cartridge-title]");
-    if (title) title.textContent = game.title;
-    const system = root.querySelector("[data-cartridge-system]");
-    if (system) system.textContent = game.system;
-    const author = root.querySelector("[data-cartridge-author]");
-    if (author) author.textContent = game.author;
-    const cover = root.querySelector("[data-cartridge-cover]");
-    if (cover) {
-      cover.src = game.cover;
-      cover.alt = `${game.title}, by ${game.author}`;
-    }
-    insertButton.disabled = !!action;
-    insertButton.textContent = action
-      ? action.kind === "insert"
-        ? "Inserting…"
-        : "Ejecting…"
-      : seated
-        ? "Eject cartridge"
-        : "Insert cartridge";
-    pauseButton.setAttribute("aria-pressed", String(paused));
-    pauseButton.setAttribute(
+    stage.setAttribute(
       "aria-label",
-      paused ? "Play cartridge animation" : "Pause cartridge animation",
+      `${game.title}, ${game.system}. Cartridge carousel.`,
     );
-    pauseButton.textContent = paused ? "Play motion" : "Pause motion";
-    if (action) controls.setAttribute("aria-busy", "true");
-    else controls.removeAttribute("aria-busy");
-    const link = root.querySelector("[data-cartridge-open]");
-    if (link) {
-      link.href = `https://devnet.plemu.xyz/play/${game.slug}`;
-      link.hidden = !seated;
-    }
+    pauseButton.setAttribute("aria-pressed", String(paused));
+    const label = paused
+      ? "Play cartridge animation"
+      : "Pause cartridge animation";
+    pauseButton.setAttribute("aria-label", label);
+    pauseButton.title = label;
+    stage.setAttribute("aria-busy", String(!!action));
   }
   function stop() {
     if (frame) cancelAnimationFrame(frame);
@@ -924,15 +782,14 @@ export async function mountCartridgeHero(root) {
     if (index === selected && pendingSelection === null) return;
     if (action || seated) {
       pendingSelection = index;
-      if (seated && !action) eject();
+      pendingInsert = false;
+      if (action?.kind !== "eject") eject();
       return;
     }
     selected = index;
     phase("idle");
     update();
-    announce(
-      `${HERO_GAMES[selected].title}. Choose Insert cartridge to bring it to the console.`,
-    );
+    announce(`${HERO_GAMES[selected].title} selected.`);
     if (paused) placeCards(true);
     wake();
   }
@@ -940,11 +797,12 @@ export async function mountCartridgeHero(root) {
     select((pendingSelection ?? selected) + delta);
   }
   function insert() {
-    if (disposed || action) return;
-    if (seated) {
-      eject();
+    if (disposed || action?.kind === "insert" || seated) return;
+    if (action?.kind === "eject") {
+      pendingInsert = true;
       return;
     }
+    pendingInsert = false;
     if (!cards.length) {
       seated = true;
       phase("ready");
@@ -960,8 +818,8 @@ export async function mountCartridgeHero(root) {
     wake();
   }
   function eject() {
-    if (disposed || action) return;
-    if (!seated) return;
+    pendingInsert = false;
+    if (disposed || action?.kind === "eject" || (!seated && !action)) return;
     if (!cards.length) {
       seated = false;
       if (pendingSelection !== null) {
@@ -973,11 +831,35 @@ export async function mountCartridgeHero(root) {
       return;
     }
     action = { kind: "eject", time: 0, start: poseOf(cards[selected].group) };
+    seated = false;
     phase("ejecting");
     update();
     announce("Releasing the cartridge.");
     if (paused) finishAction();
     wake();
+  }
+  function activate(point) {
+    if (point) {
+      const rect = renderer.domElement.getBoundingClientRect();
+      pointerVector.set(
+        ((point.x - rect.left) / rect.width) * 2 - 1,
+        (-(point.y - rect.top) / rect.height) * 2 + 1,
+      );
+      raycaster.setFromCamera(pointerVector, camera);
+      const hit = raycaster.intersectObjects(
+        cards.map((card) => card.group),
+        true,
+      )[0];
+      let object = hit?.object;
+      while (object && object.userData.gameIndex === undefined)
+        object = object.parent;
+      if (object && object.userData.gameIndex !== selected) {
+        select(object.userData.gameIndex);
+        return;
+      }
+    }
+    if (seated || action?.kind === "insert") eject();
+    else insert();
   }
   function finishAction() {
     if (!action) return;
@@ -987,11 +869,6 @@ export async function mountCartridgeHero(root) {
     if (inserted) {
       phase("ready");
       consoleModel?.display(HERO_GAMES[selected].short, "ready");
-      if (pendingSelection !== null && pendingSelection !== selected) {
-        update();
-        eject();
-        return;
-      }
       pendingSelection = null;
       announce(`${HERO_GAMES[selected].title} is seated. Open Plemu to play.`);
     } else {
@@ -1001,12 +878,11 @@ export async function mountCartridgeHero(root) {
       }
       phase("idle");
       consoleModel?.display("", "idle");
-      announce(
-        `${HERO_GAMES[selected].title}. Choose Insert cartridge to bring it to the console.`,
-      );
+      announce(`${HERO_GAMES[selected].title} selected.`);
     }
     placeCards(paused);
     update();
+    if (!inserted && pendingInsert) insert();
     wake();
   }
   function pause(value = !paused) {
@@ -1020,7 +896,7 @@ export async function mountCartridgeHero(root) {
     wake();
   }
   function placeCards(instant = false, delta = 0) {
-    const blend = instant || paused ? 1 : 1 - Math.exp(-delta * 7);
+    const blend = instant || paused ? 1 : 1 - Math.exp(-delta * 19);
     cards.forEach((card, index) => {
       if (action && index === selected) return;
       const pose =
@@ -1063,17 +939,21 @@ export async function mountCartridgeHero(root) {
       let pose;
       if (progress < 0.62) {
         const t = smooth(progress / 0.62);
+        const start = action.start;
         pose = {
-          x: 0,
-          y: MathUtils.lerp(SLOT.y, ALIGN.y, t),
-          z: SLOT.z,
-          scale: 1,
+          x: MathUtils.lerp(start.x, 0, t),
+          y: MathUtils.lerp(start.y, Math.max(ALIGN.y, start.y), t),
+          z: MathUtils.lerp(start.z, SLOT.z, t),
+          rx: start.rx * (1 - t),
+          ry: start.ry * (1 - t),
+          rz: start.rz * (1 - t),
+          scale: MathUtils.lerp(start.scale, 1, t),
         };
       } else {
         const t = smooth((progress - 0.62) / 0.38);
         pose = {
           x: MathUtils.lerp(0, end.x, t),
-          y: MathUtils.lerp(ALIGN.y, end.y, t),
+          y: MathUtils.lerp(Math.max(ALIGN.y, action.start.y), end.y, t),
           z: MathUtils.lerp(SLOT.z, end.z, t),
           rx: end.rx * t,
           ry: end.ry * t,
@@ -1207,12 +1087,6 @@ export async function mountCartridgeHero(root) {
     cards.forEach((card) => scene.add(card.group));
     placeCards(true);
     if (seated) consoleModel.display(HERO_GAMES[selected].short, "ready");
-    stage.setAttribute("tabindex", "0");
-    stage.setAttribute("role", "group");
-    stage.setAttribute(
-      "aria-label",
-      "Cartridge carousel. Use left and right arrows to choose, and Enter to insert or eject.",
-    );
     canvas.setAttribute("aria-hidden", "true");
     canvas.className = "ph-canvas";
     setSize();
@@ -1283,87 +1157,16 @@ export async function mountCartridgeHero(root) {
           card.artMaterial.map = texture;
           textures.add(previous);
           const ratio = texture.image.width / texture.image.height;
-          card.art.scale.x = Math.min(1, ratio / (1.5 / 1.35));
-          card.art.scale.y = Math.min(1, 1.5 / 1.35 / ratio);
+          card.art.scale.x = Math.min(1, ratio / (1.74 / 1.872));
+          card.art.scale.y = Math.min(1, 1.74 / 1.872 / ratio);
           wake();
         })
         .catch(() => {
           if (!disposed) wake();
         });
     });
-    prev.addEventListener("click", () => navigate(-1), { signal });
-    next.addEventListener("click", () => navigate(1), { signal });
-    selectButtons.forEach((button) =>
-      button.addEventListener(
-        "click",
-        () => select(button.dataset.cartridgeSelect),
-        { signal },
-      ),
-    );
-    insertButton.addEventListener("click", insert, { signal });
     pauseButton.addEventListener("click", () => pause(), { signal });
-    root.addEventListener(
-      "keydown",
-      (event) => {
-        if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
-          event.preventDefault();
-          navigate(event.key === "ArrowRight" ? 1 : -1);
-        } else if (
-          (event.key === "Enter" || event.key === " ") &&
-          event.target === stage
-        ) {
-          event.preventDefault();
-          insert();
-        }
-      },
-      { signal },
-    );
-    stage.addEventListener(
-      "pointerdown",
-      (event) => {
-        if (!event.isPrimary || event.button !== 0) return;
-        pointer = { id: event.pointerId, x: event.clientX, y: event.clientY };
-        stage.setPointerCapture(event.pointerId);
-      },
-      { signal },
-    );
-    stage.addEventListener(
-      "pointerup",
-      (event) => {
-        if (!pointer || event.pointerId !== pointer.id) return;
-        const dx = event.clientX - pointer.x,
-          dy = event.clientY - pointer.y;
-        pointer = null;
-        if (Math.abs(dx) > 30 && Math.abs(dx) > Math.abs(dy) * 1.3) {
-          navigate(dx < 0 ? 1 : -1);
-          return;
-        }
-        if (Math.abs(dx) + Math.abs(dy) > 15) return;
-        const rect = canvas.getBoundingClientRect();
-        pointerVector.set(
-          ((event.clientX - rect.left) / rect.width) * 2 - 1,
-          (-(event.clientY - rect.top) / rect.height) * 2 + 1,
-        );
-        raycaster.setFromCamera(pointerVector, camera);
-        const hit = raycaster.intersectObjects(
-          cards.map((card) => card.group),
-          true,
-        )[0];
-        if (!hit) return;
-        let object = hit.object;
-        while (object && object.userData.gameIndex === undefined)
-          object = object.parent;
-        if (!object) return;
-        if (object.userData.gameIndex === selected) insert();
-        else select(object.userData.gameIndex);
-      },
-      { signal },
-    );
-    const cancelPointer = () => {
-      pointer = null;
-    };
-    stage.addEventListener("pointercancel", cancelPointer, { signal });
-    stage.addEventListener("lostpointercapture", cancelPointer, { signal });
+    bindCartridgeInput(stage, { navigate, insert, eject, activate, signal });
     canvas.addEventListener(
       "webglcontextlost",
       (event) => {

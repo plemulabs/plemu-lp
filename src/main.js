@@ -2,85 +2,81 @@ import "./styles.css";
 import "./product-story.css";
 import "./cartridge-hero.css";
 import "./seeker.css";
+import { bindCartridgeInput } from "./cartridge-input.js";
+import { mountProductStories } from "./product-interactions.js";
 
 const saveData = navigator.connection?.saveData === true;
 document.documentElement.dataset.saveData = String(saveData);
 const motion = matchMedia("(prefers-reduced-motion: reduce)");
 const arcade = document.querySelector("[data-cartridge-hero]");
 if (arcade) {
-  const choices = [...arcade.querySelectorAll("[data-cartridge-select]")];
-  let selected = Math.max(
-    0,
-    choices.findIndex(
-      (button) => button.dataset.cartridgeSelect === arcade.dataset.selected,
-    ),
-  );
-  let paused = motion.matches;
+  const choices = [...arcade.querySelectorAll("[data-static-cartridge]")];
+  const stage = arcade.querySelector("[data-cartridge-stage]");
   const pause = arcade.querySelector("[data-cartridge-pause]");
   const status = arcade.querySelector("[data-cartridge-status]");
   const lightOwnsControls = () => arcade.dataset.controlsOwner !== "hero";
+  let selected = 0;
+  let paused = motion.matches;
   function syncLightState() {
     selected = Math.max(
       0,
       choices.findIndex(
-        (button) => button.dataset.cartridgeSelect === arcade.dataset.selected,
+        (choice) => choice.dataset.staticCartridge === arcade.dataset.selected,
       ),
     );
     paused = arcade.dataset.paused === "true";
   }
   function updateLight() {
     const choice = choices[selected];
-    arcade.dataset.selected = choice.dataset.cartridgeSelect;
+    arcade.dataset.selected = choice.dataset.staticCartridge;
     arcade.dataset.paused = String(paused);
-    choices.forEach((button) =>
-      button.setAttribute("aria-pressed", String(button === choice)),
+    choices.forEach((card) =>
+      card.classList.toggle("is-selected", card === choice),
     );
-    arcade.querySelector("[data-cartridge-title]").textContent =
-      choice.dataset.gameTitle;
-    arcade.querySelector("[data-cartridge-system]").textContent =
-      choice.dataset.gameSystem;
-    arcade.querySelector("[data-cartridge-insert]").textContent =
-      arcade.dataset.phase === "ready" ? "Eject cartridge" : "Insert cartridge";
-    pause.textContent = paused ? "Play motion" : "Pause motion";
-    pause.removeAttribute("aria-label");
+    stage.setAttribute(
+      "aria-label",
+      `${choice.dataset.gameTitle}, ${choice.dataset.gameSystem}. Cartridge carousel.`,
+    );
+    const label = paused
+      ? "Play cartridge animation"
+      : "Pause cartridge animation";
+    pause.setAttribute("aria-label", label);
+    pause.title = label;
     pause.setAttribute("aria-pressed", String(paused));
   }
   function selectLight(index) {
-    if (!lightOwnsControls()) return;
-    paused = arcade.dataset.paused === "true";
+    syncLightState();
     selected = (index + choices.length) % choices.length;
     arcade.dataset.phase = "idle";
     updateLight();
-    status.textContent = `${choices[selected].dataset.gameTitle} selected. Insert a cartridge to explore the console concept.`;
+    status.textContent = `${choices[selected].dataset.gameTitle} selected.`;
   }
-  choices.forEach((button, index) =>
-    button.addEventListener("click", () => selectLight(index)),
-  );
-  arcade
-    .querySelector("[data-cartridge-prev]")
-    .addEventListener("click", () => {
+  function seatLight(seated) {
+    syncLightState();
+    arcade.dataset.phase = seated ? "ready" : "idle";
+    updateLight();
+    status.textContent = `${choices[selected].dataset.gameTitle} ${seated ? "inserted" : "ejected"}.`;
+  }
+  stage.tabIndex = 0;
+  stage.setAttribute("role", "group");
+  stage.setAttribute("aria-roledescription", "carousel");
+  bindCartridgeInput(stage, {
+    enabled: lightOwnsControls,
+    navigate(delta) {
       syncLightState();
-      selectLight(selected - 1);
-    });
-  arcade
-    .querySelector("[data-cartridge-next]")
-    .addEventListener("click", () => {
+      selectLight(selected + delta);
+    },
+    insert: () => seatLight(true),
+    eject: () => seatLight(false),
+    activate(point) {
       syncLightState();
-      selectLight(selected + 1);
-    });
-  arcade
-    .querySelector("[data-cartridge-insert]")
-    .addEventListener("click", () => {
-      if (!lightOwnsControls()) return;
-      syncLightState();
-      arcade.dataset.phase =
-        arcade.dataset.phase === "ready" ? "idle" : "ready";
-      updateLight();
-      status.textContent =
-        arcade.dataset.phase === "ready"
-          ? `${choices[selected].dataset.gameTitle} is seated. Open Plemu to play.`
-          : "Choose a cartridge. There’s a world inside.";
-    });
+      const card = point?.target.closest("[data-static-cartridge]");
+      const index = choices.indexOf(card);
+      if (index >= 0 && index !== selected) selectLight(index);
+      else seatLight(arcade.dataset.phase !== "ready");
+    },
+  });
+  arcade.dataset.inputReady = "true";
   pause.addEventListener("click", () => {
     if (!lightOwnsControls()) return;
     syncLightState();
@@ -89,36 +85,14 @@ if (arcade) {
     updateLight();
   });
   motion.addEventListener("change", () => {
-    if (!lightOwnsControls() || arcade.dataset.manualMotion === "true") return;
-    paused = motion.matches;
-    updateLight();
-  });
-  const stage = arcade.querySelector("[data-cartridge-stage]");
-  stage.tabIndex = 0;
-  stage.setAttribute("role", "group");
-  stage.setAttribute(
-    "aria-label",
-    "Cartridge carousel. Use the left and right arrow keys to choose a game. Press Enter to insert or eject.",
-  );
-  arcade.addEventListener("keydown", (event) => {
-    if (
-      !lightOwnsControls() ||
-      (!event.target.closest("[data-cartridge-picker]") &&
-        event.target !== stage)
-    )
-      return;
-    if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
-      event.preventDefault();
-      syncLightState();
-      selectLight(selected + (event.key === "ArrowLeft" ? -1 : 1));
-    } else if (
-      (event.key === "Enter" || event.key === " ") &&
-      event.target === stage
-    ) {
-      event.preventDefault();
-      arcade.querySelector("[data-cartridge-insert]").click();
+    if (!lightOwnsControls()) return;
+    if (motion.matches || arcade.dataset.manualMotion !== "true") {
+      paused = motion.matches;
+      updateLight();
     }
   });
+  syncLightState();
+  paused = motion.matches;
   updateLight();
 }
 
@@ -170,8 +144,7 @@ function enhanceNearViewport(node, enhance) {
           node.dataset.controlsOwner = "light";
         } else {
           node.dataset.scene = "fallback";
-          node.querySelector("[data-seeker-turn]").hidden = true;
-          node.querySelector("[data-seeker-motion]").hidden = true;
+          node.querySelector("[data-seeker-hint]").hidden = true;
         }
       });
     if ("requestIdleCallback" in window)
@@ -200,48 +173,7 @@ enhanceNearViewport(showcase, async () => {
   await mountSeeker(showcase);
 });
 
-const worldWords = [
-  "A first build.",
-  "A community takes shape.",
-  "A world grows.",
-  "The next chapter.",
-];
-const world = document.querySelector("[data-lifecycle-world]");
-document.querySelectorAll("[data-lifecycle-step]").forEach((button) => {
-  button.addEventListener("click", () => {
-    document
-      .querySelectorAll("[data-lifecycle-step]")
-      .forEach((other) =>
-        other.setAttribute("aria-pressed", String(other === button)),
-      );
-    world.dataset.lifecycleWorld = button.dataset.lifecycleStep;
-    world.querySelector("[data-world-word]").textContent =
-      worldWords[Number(button.dataset.lifecycleStep)];
-  });
-});
-const remixCaptions = {
-  world:
-    "Reimagine a level, a setting or an entire journey. An illustration of remix possibilities.",
-  rules:
-    "Change the challenge, the pace or how a world works. An illustration of remix possibilities.",
-  characters:
-    "Bring a new cast, a different look and your own story. An illustration of remix possibilities.",
-};
-const remix = document.querySelector("[data-remix-art]");
-document.querySelectorAll("[data-remix-choice]").forEach((button) => {
-  button.addEventListener("click", () => {
-    const choice = button.dataset.remixChoice;
-    if (!remixCaptions[choice]) return;
-    remix.dataset.remixArt = choice;
-    remix.querySelector("[data-remix-caption]").textContent =
-      remixCaptions[choice];
-    document
-      .querySelectorAll("[data-remix-choice]")
-      .forEach((other) =>
-        other.setAttribute("aria-pressed", String(other === button)),
-      );
-  });
-});
+mountProductStories(motion, saveData);
 if ("IntersectionObserver" in window) {
   const ambient = new IntersectionObserver(
     (entries) =>

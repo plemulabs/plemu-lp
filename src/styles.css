@@ -302,37 +302,6 @@ figure {
   isolation: isolate;
   align-self: center;
 }
-.arcade-caption {
-  text-align: center;
-  font-size: 10px;
-  color: #a7aab2;
-  line-height: 1.8;
-  margin-top: 13px;
-}
-.arcade-caption span {
-  display: block;
-  color: #808997;
-  font-size: 9px;
-}
-.arcade-description {
-  display: flex;
-  justify-content: center;
-  gap: 12px;
-  align-items: center;
-  margin-block: 5px 10px;
-  font-family: var(--heading);
-  font-size: 15px;
-}
-.arcade-description > [data-cartridge-system] {
-  font-family:
-    DM Sans,
-    Arial,
-    sans-serif;
-  font-size: 10px;
-  color: #999ea8;
-  padding-left: 12px;
-  border-left: 1px solid #ffffff25;
-}
 .arcade-static {
   position: absolute;
   inset: 0;

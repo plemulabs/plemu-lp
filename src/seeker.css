@@ -306,19 +306,6 @@
 .seeker-controls button:hover {
   color: var(--lime);
 }
-.seeker-turn {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-}
-.seeker-turn span {
-  font-size: 18px;
-}
-.seeker-controls .seeker-motion {
-  font-size: 15px;
-  width: 42px;
-  padding: 8px;
-}
 .seeker-showcase figcaption {
   margin-top: 15px;
   font-size: 10px;
@@ -506,4 +493,10 @@
     padding-inline: 6px;
     font-size: 10px;
   }
+}
+
+.seeker-render:focus-visible {
+  outline: 2px solid var(--lime);
+  outline-offset: -5px;
+  border-radius: 18px;
 }

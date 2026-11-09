@@ -147,47 +147,72 @@
             data-selected="gb-adjustris"
             data-phase="browse"
           >
-            <div class="ph-stage" data-cartridge-stage>
+            <div
+              class="ph-stage"
+              data-cartridge-stage
+              aria-describedby="cartridge-instructions"
+            >
               <div
                 class="arcade-static"
                 data-cartridge-static
                 aria-hidden="true"
               >
                 <div class="static-orbit">
-                  <div class="static-cart" data-static-cartridge="gb-adjustris">
+                  <div
+                    class="static-cart"
+                    data-static-cartridge="gb-adjustris"
+                    data-app-system="gb"
+                    data-game-title="Adjustris"
+                    data-game-system="Game Boy"
+                  >
                     <img
                       src="/hero/adjustris.png"
                       width="160"
                       height="144"
                       alt=""
-                    /><span>Adjustris</span>
+                    /><span>Game Boy</span>
                   </div>
                   <div
                     class="static-cart"
                     data-static-cartridge="gba-2048-advance"
+                    data-app-system="gba"
+                    data-game-title="2048 Advance"
+                    data-game-system="Game Boy Advance"
                   >
                     <img
                       src="/hero/2048-advance.png"
                       width="630"
                       height="500"
                       alt=""
-                    /><span>2048 Advance</span>
+                    /><span>Game Boy Advance</span>
                   </div>
-                  <div class="static-cart" data-static-cartridge="gba-spindown">
+                  <div
+                    class="static-cart"
+                    data-static-cartridge="gba-spindown"
+                    data-app-system="gba"
+                    data-game-title="Spindown"
+                    data-game-system="Game Boy Advance"
+                  >
                     <img
                       src="/hero/spindown.png"
                       width="480"
                       height="384"
                       alt=""
-                    /><span>Spindown</span>
+                    /><span>Game Boy Advance</span>
                   </div>
-                  <div class="static-cart" data-static-cartridge="gb-libbet">
+                  <div
+                    class="static-cart"
+                    data-static-cartridge="gb-libbet"
+                    data-app-system="gb"
+                    data-game-title="Libbet and the Magic Floor"
+                    data-game-system="Game Boy"
+                  >
                     <img
                       src="/hero/libbet.png"
-                      width="160"
-                      height="144"
+                      width="1122"
+                      height="1402"
                       alt=""
-                    /><span>Libbet</span>
+                    /><span>Game Boy</span>
                   </div>
                 </div>
                 <div class="static-console">
@@ -200,447 +225,30 @@
                 </div>
               </div>
             </div>
-            <div class="arcade-description">
-              <span data-cartridge-title>Adjustris</span
-              ><span data-cartridge-system>Game Boy</span>
-            </div>
-            <div
-              class="ph-controls"
-              data-cartridge-controls
-              aria-label="Cartridge carousel controls"
-            >
-              <button
-                type="button"
-                class="ph-arrow"
-                data-cartridge-prev
-                aria-label="Previous cartridge"
-              >
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="m14 6-6 6 6 6" />
-                </svg>
-              </button>
-              <div
-                class="ph-picker"
-                data-cartridge-picker
-                aria-label="Choose a game"
-              >
-                <button
-                  type="button"
-                  class="ph-pick"
-                  data-cartridge-select="gb-adjustris"
-                  data-game-title="Adjustris"
-                  data-game-system="Game Boy"
-                  aria-label="Select Adjustris"
-                  aria-pressed="true"
-                ></button>
-                <button
-                  type="button"
-                  class="ph-pick"
-                  data-cartridge-select="gba-2048-advance"
-                  data-game-title="2048 Advance"
-                  data-game-system="Game Boy Advance"
-                  aria-label="Select 2048 Advance"
-                  aria-pressed="false"
-                ></button>
-                <button
-                  type="button"
-                  class="ph-pick"
-                  data-cartridge-select="gba-spindown"
-                  data-game-title="Spindown"
-                  data-game-system="Game Boy Advance"
-                  aria-label="Select Spindown"
-                  aria-pressed="false"
-                ></button>
-                <button
-                  type="button"
-                  class="ph-pick"
-                  data-cartridge-select="gb-libbet"
-                  data-game-title="Libbet and the Magic Floor"
-                  data-game-system="Game Boy"
-                  aria-label="Select Libbet and the Magic Floor"
-                  aria-pressed="false"
-                ></button>
-              </div>
-              <button
-                type="button"
-                class="ph-arrow"
-                data-cartridge-next
-                aria-label="Next cartridge"
-              >
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="m10 6 6 6-6 6" />
-                </svg>
-              </button>
-              <button type="button" class="ph-insert" data-cartridge-insert>
-                Insert cartridge
-              </button>
-              <button
-                type="button"
-                class="ph-pause"
-                data-cartridge-pause
-                aria-label="Pause cartridge motion"
-                aria-pressed="false"
-              >
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M9 6v12m6-12v12" />
-                </svg>
-              </button>
-            </div>
-            <p class="ph-status" data-cartridge-status aria-live="polite">
-              Choose a cartridge. There’s a world inside.
-            </p>
-          </div>
-          <figcaption class="arcade-caption">
-            Digital games. A little physical ritual.
-            <span>Interactive console concept.</span>
-          </figcaption>
-        </figure>
-      </section>
-      <section
-        class="collection-section"
-        id="collect"
-        aria-labelledby="collection-title"
-      >
-        <div class="container collection-top">
-          <div>
-            <p class="story-label">Play, collect, belong.</p>
-            <h2 id="collection-title">A cartridge.<br />A whole world.</h2>
-          </div>
-          <p class="section-description">
-            The joy of a game on your shelf, built for a digital collection.
-            Plemu connects onchain game tokens with supported experiences, while
-            each creator’s license defines your right to play.
-          </p>
-        </div>
-        <div class="container collection-body">
-          <figure
-            class="collection-art"
-            data-ambient-art
-            aria-label="Illustration of a Plemu pack and digital cartridges"
-          >
-            <div class="collect-orbit collect-orbit-one"></div>
-            <div class="collect-orbit collect-orbit-two"></div>
-            <div class="story-pack">
-              <div class="pack-crimp"></div>
-              <span>plemu</span
-              ><img
-                src="/brand/plemu-pixel-face.png"
-                width="2000"
-                height="2000"
-                alt=""
-              /><strong>A little<br />possibility.</strong>
-              <div class="pack-crimp"></div>
-            </div>
-            <div class="story-cartridge story-cartridge-one">
-              <img
-                src="/hero/libbet.png"
-                width="160"
-                height="144"
-                alt="Libbet and the Magic Floor artwork"
-                loading="lazy"
-              /><span>Libbet</span>
-            </div>
-            <div class="story-cartridge story-cartridge-two">
-              <img
-                src="/hero/2048-advance.png"
-                width="630"
-                height="500"
-                alt="2048 Advance artwork"
-                loading="lazy"
-              /><span>2048 Advance</span>
-            </div>
-            <span class="pixel-spark spark-one" aria-hidden="true"></span
-            ><span class="pixel-spark spark-two" aria-hidden="true"></span>
-            <figcaption>
-              That new-pack feeling. More worlds to discover.
-            </figcaption>
-          </figure>
-          <div class="collection-features">
-            <article>
-              <svg class="story-icon" viewBox="0 0 32 32" aria-hidden="true">
-                <path d="M7 4h18v24H7zM11 4v7h10V4M11 19h10v9H11" />
-              </svg>
-              <div>
-                <h3>Play the complete edition.</h3>
-                <p>
-                  Supported tokens and receipts can establish eligibility for a
-                  game. Each release spells out full-game access, its play
-                  license and any transfer rules.
-                </p>
-              </div>
-            </article>
-            <article>
-              <svg class="story-icon" viewBox="0 0 32 32" aria-hidden="true">
-                <path
-                  d="m5 10 11-6 11 6v13l-11 6-11-6zm0 0 11 6 11-6M16 16v13M10 7l12 6"
-                />
-              </svg>
-              <div>
-                <h3>Make a little discovery.</h3>
-                <p>
-                  Open packs of game-token rewards, find a new favorite and
-                  build your collection. Explore the pack’s contents and
-                  mechanics before approving anything.
-                </p>
-                <a class="inline-link" href="https://devnet.plemu.xyz/packs"
-                  >Explore Devnet packs <span aria-hidden="true">↗</span></a
-                >
-              </div>
-            </article>
-            <article>
-              <svg class="story-icon" viewBox="0 0 32 32" aria-hidden="true">
-                <path
-                  d="M7 24 23 8m-3-3 7 7M6 6v6M3 9h6m15 12v8m-4-4h8M6 24l-1 4 4-1"
-                />
-              </svg>
-              <div>
-                <h3>Change how the world plays.</h3>
-                <p>
-                  Our remix direction brings mods, hacks and expansions
-                  alongside game communities, with clear licenses and compatible
-                  base-game requirements. Remix publishing is in development.
-                </p>
-              </div>
-            </article>
-          </div>
-        </div>
-        <p class="container ownership-note">
-          A token is distinct from a play license. Collecting or trading it does
-          not transfer a game’s copyright or automatically grant rights to
-          redistribute it. Your rights come from the release’s publisher.
-        </p>
-      </section>
-      <section
-        class="lifecycle-section"
-        id="build-together"
-        aria-labelledby="lifecycle-title"
-      >
-        <div class="container lifecycle-heading">
-          <div>
-            <p class="story-label">The next chapter, together.</p>
-            <h2 id="lifecycle-title">Good games don’t<br />end at launch.</h2>
-          </div>
-          <div>
-            <p class="section-description">
-              A public token raise can do more than support a first build. It
-              can gather a community that stays for the demo, the updates and
-              the next big idea.
-            </p>
-            <span class="direction-label"
-              ><i aria-hidden="true"></i> Our direction · in development</span
-            >
-          </div>
-        </div>
-        <div class="container lifecycle-body">
-          <div
-            class="lifecycle-world"
-            data-lifecycle-world="0"
-            data-ambient-art
-            aria-hidden="true"
-          >
-            <div class="world-grid"></div>
-            <div class="voxel-ground">
-              <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i
-              ><i></i><i></i><i></i>
-            </div>
-            <div class="voxel-tower tower-one"><i></i><i></i><i></i></div>
-            <div class="voxel-tower tower-two"><i></i><i></i><i></i></div>
-            <div class="voxel-flag"><i></i></div>
-            <span class="world-word" data-world-word>A first build.</span
-            ><span class="world-caption"
-              >Small beginnings. Shared possibilities.</span
-            >
-          </div>
-          <ol
-            class="lifecycle-steps"
-            aria-label="Game community development model"
-          >
-            <li>
-              <button type="button" data-lifecycle-step="0" aria-pressed="true">
-                <span class="step-number">01</span
-                ><span
-                  ><strong>Put a build in players’ hands.</strong
-                  ><span
-                    >A demo, an original game, an authorized remix. Start with
-                    something people can understand and play.</span
-                  ></span
-                ><svg viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="m9 5 7 7-7 7" />
-                </svg>
-              </button>
-            </li>
-            <li>
-              <button
-                type="button"
-                data-lifecycle-step="1"
-                aria-pressed="false"
-              >
-                <span class="step-number">02</span
-                ><span
-                  ><strong>Let a community form in public.</strong
-                  ><span
-                    >A game-token raise brings onchain participation into view,
-                    with a clear development plan and token mechanics.</span
-                  ></span
-                ><svg viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="m9 5 7 7-7 7" />
-                </svg>
-              </button>
-            </li>
-            <li>
-              <button
-                type="button"
-                data-lifecycle-step="2"
-                aria-pressed="false"
-              >
-                <span class="step-number">03</span
-                ><span
-                  ><strong>Build toward the next milestone.</strong
-                  ><span
-                    >New levels, a balance pass, a fuller release. Creators and
-                    contributors keep developing through the game’s
-                    lifecycle.</span
-                  ></span
-                ><svg viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="m9 5 7 7-7 7" />
-                </svg>
-              </button>
-            </li>
-            <li>
-              <button
-                type="button"
-                data-lifecycle-step="3"
-                aria-pressed="false"
-              >
-                <span class="step-number">04</span
-                ><span
-                  ><strong>Let outcomes shape what’s next.</strong
-                  ><span
-                    >Our futarchy-inspired direction explores markets around
-                    development proposals and shared outcomes, adapted to the
-                    decisions a game community makes.</span
-                  ></span
-                ><svg viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="m9 5 7 7-7 7" />
-                </svg>
-              </button>
-            </li>
-          </ol>
-        </div>
-        <div class="container lifecycle-bottom">
-          <p>
-            Today: game-token markets and lifecycle stages on Devnet. Creator
-            launches, collaborative development and futarchy tools are planned.
-          </p>
-          <a class="inline-link" href="https://devnet.plemu.xyz/market"
-            >Meet the game markets <span aria-hidden="true">↗</span></a
-          >
-        </div>
-      </section>
-      <section
-        class="remix-section container"
-        id="remix"
-        aria-labelledby="remix-title"
-      >
-        <div class="remix-heading">
-          <p class="story-label">Same roots. Different worlds.</p>
-          <h2 id="remix-title">What could you<br />make of it?</h2>
-          <p class="section-description">
-            Our growing research roster brings decompilations, disassemblies and
-            rebuild projects into view. A starting point for communities to
-            study, modify and turn into original or authorized experiences.
-          </p>
-        </div>
-        <figure class="remix-art" data-remix-art="world" data-ambient-art>
-          <div class="remix-comparison">
-            <div class="mini-world mini-world-original">
-              <span class="mini-world-label">A starting point</span>
-              <div class="mini-moon"></div>
-              <div class="mini-mountains"></div>
-              <div class="mini-ground"></div>
-              <div class="mini-player"></div>
-            </div>
-            <div class="mini-world mini-world-remix">
-              <span class="mini-world-label">Your next idea</span>
-              <div class="mini-moon"></div>
-              <div class="mini-mountains"></div>
-              <div class="mini-ground"></div>
-              <div class="mini-player"></div>
-              <i class="mini-star"></i>
-            </div>
-          </div>
-          <div
-            class="remix-switches"
-            role="group"
-            aria-label="Explore remix possibilities"
-          >
-            <button type="button" data-remix-choice="world" aria-pressed="true">
-              New worlds</button
-            ><button
+            <button
               type="button"
-              data-remix-choice="rules"
+              class="ph-pause"
+              data-cartridge-pause
+              aria-label="Pause cartridge animation"
               aria-pressed="false"
             >
-              New rules</button
-            ><button
-              type="button"
-              data-remix-choice="characters"
-              aria-pressed="false"
-            >
-              New characters
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path class="ph-pause-icon" d="M9 6v12m6-12v12" />
+                <path class="ph-play-icon" d="m9 5 10 7-10 7Z" />
+              </svg>
             </button>
-          </div>
-          <figcaption data-remix-caption aria-live="polite">
-            Reimagine a level, a setting or an entire journey. An illustration
-            of remix possibilities.
-          </figcaption>
-        </figure>
-        <div class="source-shelf">
-          <div class="source-intro">
-            <h3>A growing shelf<br />of starting points.</h3>
-            <p>
-              Explore independent upstream projects from our research roster.
+            <p id="cartridge-instructions" class="ph-accessible">
+              Swipe left or right to switch games. Swipe down to insert and up
+              to eject. Tap a cartridge to select or insert it. With a keyboard,
+              use the arrow keys, or Enter to insert or eject.
             </p>
+            <p
+              class="ph-accessible"
+              data-cartridge-status
+              aria-live="polite"
+            ></p>
           </div>
-          <a
-            href="https://github.com/pret/pokeemerald"
-            target="_blank"
-            rel="noopener noreferrer"
-            ><span class="source-symbol" aria-hidden="true">{ }</span
-            ><span
-              ><strong>Pokémon Emerald</strong
-              ><small>GBA · Decompilation</small></span
-            ><svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M6 18 18 6M6 6h12v12" /></svg></a
-          ><a
-            href="https://github.com/pret/pokefirered"
-            target="_blank"
-            rel="noopener noreferrer"
-            ><span class="source-symbol" aria-hidden="true">{ }</span
-            ><span
-              ><strong>FireRed / LeafGreen</strong
-              ><small>GBA · Decompilation</small></span
-            ><svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M6 18 18 6M6 6h12v12" /></svg></a
-          ><a
-            href="https://github.com/IsoFrieze/SMWDisX"
-            target="_blank"
-            rel="noopener noreferrer"
-            ><span class="source-symbol" aria-hidden="true">&lt;/&gt;</span
-            ><span
-              ><strong>SMW Disassembly X</strong
-              ><small>SNES · Disassembly</small></span
-            ><svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M6 18 18 6M6 6h12v12" /></svg
-          ></a>
-        </div>
-        <p class="source-note">
-          Independent research projects, not Plemu-distributed editions. Check
-          each project’s code, assets, original-game rights and build
-          requirements before sharing. Source availability alone is not a
-          redistribution license. Remix tooling and publishing are in
-          development.
-        </p>
+        </figure>
       </section>
       <section
         class="seeker-section"
@@ -740,19 +348,6 @@
                   Market
                 </button>
               </div>
-              <button type="button" class="seeker-turn" data-seeker-turn hidden>
-                Turn Seeker <span aria-hidden="true">↻</span>
-              </button>
-              <button
-                type="button"
-                class="seeker-motion"
-                hidden
-                data-seeker-motion
-                aria-pressed="false"
-                aria-label="Pause Seeker animation"
-              >
-                <span data-motion-icon aria-hidden="true">Ⅱ</span>
-              </button>
             </div>
             <figcaption id="seeker-caption">
               Illustrative Seeker render. Actual Plemu beta screens.<span
@@ -760,7 +355,7 @@
                 aria-live="polite"
                 hidden
               >
-                Drag to turn, or use the controls.</span
+                Drag to turn. Tap to pause.</span
               >
             </figcaption>
           </figure>
@@ -819,6 +414,551 @@
             <span aria-hidden="true">◇</span> No wallet needed to press play.
           </p>
         </div>
+      </section>
+      <section
+        class="collection-section"
+        id="collect"
+        aria-labelledby="collection-title"
+      >
+        <div class="container collection-top">
+          <div>
+            <p class="story-label">Play, collect, belong.</p>
+            <h2 id="collection-title">A cartridge.<br />A whole world.</h2>
+          </div>
+          <p class="section-description">
+            The joy of a game on your shelf, built for a digital collection.
+            Plemu connects onchain game tokens with supported experiences, while
+            each creator’s license defines your right to play.
+          </p>
+        </div>
+        <div class="container collection-body">
+          <figure
+            class="collection-art"
+            data-ambient-art
+            aria-label="Interactive Plemu pack preview and native game cartridges"
+          >
+            <div class="collect-orbit collect-orbit-one"></div>
+            <div class="collect-orbit collect-orbit-two"></div>
+            <div
+              class="pack-envelope"
+              data-pack-preview
+              data-pack-state="sealed"
+            >
+              <div
+                class="pack-reward story-cartridge"
+                data-pack-reward
+                data-app-system="gb"
+                aria-hidden="true"
+              >
+                <img
+                  src="/hero/adjustris.png"
+                  width="160"
+                  height="144"
+                  alt=""
+                  data-pack-cover
+                  loading="lazy"
+                />
+                <span data-pack-system>Game Boy</span>
+              </div>
+              <button
+                type="button"
+                class="story-pack"
+                data-pack-seal
+                disabled
+                aria-label="Open a preview pack. Swipe across the seal, or press Enter."
+                aria-describedby="pack-preview-caption"
+              >
+                <span
+                  class="pack-seal-strip pack-crimp"
+                  aria-hidden="true"
+                ></span>
+                <span class="pack-face">
+                  <span class="pack-wordmark">plemu</span>
+                  <img
+                    src="/brand/plemu-pixel-face.png"
+                    width="2000"
+                    height="2000"
+                    alt=""
+                  />
+                  <strong>A little<br />possibility.</strong>
+                  <span class="pack-swipe" aria-hidden="true"
+                    >Swipe to open
+                    <svg viewBox="0 0 40 16">
+                      <path d="M2 8h34m-6-5 6 5-6 5" /></svg
+                  ></span>
+                  <span class="pack-crimp"></span>
+                </span>
+              </button>
+              <i class="pack-fragment fragment-one" aria-hidden="true"></i
+              ><i class="pack-fragment fragment-two" aria-hidden="true"></i
+              ><i class="pack-fragment fragment-three" aria-hidden="true"></i>
+            </div>
+            <div
+              class="story-cartridge story-cartridge-one"
+              data-app-system="gb"
+            >
+              <img
+                src="/hero/libbet.png"
+                width="1122"
+                height="1402"
+                alt="Libbet and the Magic Floor native cartridge cover"
+                loading="lazy"
+              /><span>Game Boy</span>
+            </div>
+            <div
+              class="story-cartridge story-cartridge-two"
+              data-app-system="gba"
+            >
+              <img
+                src="/hero/2048-advance.png"
+                width="630"
+                height="500"
+                alt="2048 Advance native cartridge cover"
+                loading="lazy"
+              /><span>Game Boy Advance</span>
+            </div>
+            <span class="pixel-spark spark-one" aria-hidden="true"></span
+            ><span class="pixel-spark spark-two" aria-hidden="true"></span>
+            <figcaption
+              id="pack-preview-caption"
+              data-pack-caption
+              aria-live="polite"
+            >
+              Swipe across the pack. See what’s inside.
+            </figcaption>
+            <button type="button" class="pack-reset" data-pack-reset hidden>
+              Try another pack
+            </button>
+          </figure>
+          <div class="collection-features">
+            <article>
+              <svg class="story-icon" viewBox="0 0 32 32" aria-hidden="true">
+                <path d="M7 4h18v24H7zM11 4v7h10V4M11 19h10v9H11" />
+              </svg>
+              <div>
+                <h3>Play the complete edition.</h3>
+                <p>
+                  Supported tokens and receipts can establish eligibility for a
+                  game. Each release spells out full-game access, its play
+                  license and any transfer rules.
+                </p>
+              </div>
+            </article>
+            <article>
+              <svg class="story-icon" viewBox="0 0 32 32" aria-hidden="true">
+                <path
+                  d="m5 10 11-6 11 6v13l-11 6-11-6zm0 0 11 6 11-6M16 16v13M10 7l12 6"
+                />
+              </svg>
+              <div>
+                <h3>Make a little discovery.</h3>
+                <p>
+                  Open packs of game-token rewards, find a new favorite and
+                  build your collection. Explore the pack’s contents and
+                  mechanics before approving anything.
+                </p>
+                <a class="inline-link" href="https://devnet.plemu.xyz/packs"
+                  >Explore Devnet packs <span aria-hidden="true">↗</span></a
+                >
+              </div>
+            </article>
+            <article>
+              <svg class="story-icon" viewBox="0 0 32 32" aria-hidden="true">
+                <path
+                  d="M7 24 23 8m-3-3 7 7M6 6v6M3 9h6m15 12v8m-4-4h8M6 24l-1 4 4-1"
+                />
+              </svg>
+              <div>
+                <h3>Change how the world plays.</h3>
+                <p>
+                  Our remix direction brings mods, hacks and expansions
+                  alongside game communities, with clear licenses and compatible
+                  base-game requirements. Remix publishing is in development.
+                </p>
+              </div>
+            </article>
+          </div>
+        </div>
+        <p class="container ownership-note">
+          A token is distinct from a play license. Collecting or trading it does
+          not transfer a game’s copyright or automatically grant rights to
+          redistribute it. Your rights come from the release’s publisher.
+        </p>
+      </section>
+      <section
+        class="lifecycle-section"
+        id="build-together"
+        aria-labelledby="lifecycle-title"
+      >
+        <div class="container lifecycle-heading">
+          <div>
+            <p class="story-label">The next chapter, together.</p>
+            <h2 id="lifecycle-title">Good games don’t<br />end at launch.</h2>
+          </div>
+          <div>
+            <p class="section-description">
+              A public token raise can do more than support a first build. It
+              can gather a community that stays for the demo, the updates and
+              the next big idea.
+            </p>
+            <span class="direction-label"
+              ><i aria-hidden="true"></i> Our direction · in development</span
+            >
+          </div>
+        </div>
+        <div class="container lifecycle-body">
+          <figure
+            class="lifecycle-world"
+            id="community-world"
+            data-lifecycle-world="0"
+            data-ambient-art
+          >
+            <svg
+              class="community-map"
+              viewBox="0 -30 600 430"
+              role="img"
+              aria-label="A small game world connected to its community, milestones and next chapter"
+            >
+              <defs>
+                <g id="community-tile">
+                  <polygon points="-32,16 0,32 0,42 -32,26" fill="#61705b" />
+                  <polygon points="32,16 0,32 0,42 32,26" fill="#78886d" />
+                  <polygon
+                    points="0,0 32,16 0,32 -32,16"
+                    fill="currentColor"
+                    stroke="#f3f6e9"
+                    stroke-width="1.2"
+                  />
+                </g>
+              </defs>
+              <ellipse
+                cx="300"
+                cy="283"
+                rx="230"
+                ry="75"
+                fill="#53634b"
+                opacity=".06"
+              />
+              <g class="map-layer is-built is-current" data-map-layer="0">
+                <use href="#community-tile" x="250" y="100" color="#c8d6a8" />
+                <use href="#community-tile" x="218" y="116" color="#c8d6a8" />
+                <use href="#community-tile" x="186" y="132" color="#c8d6a8" />
+                <use href="#community-tile" x="282" y="116" color="#c8d6a8" />
+                <use href="#community-tile" x="250" y="132" color="#c8d6a8" />
+                <use href="#community-tile" x="218" y="148" color="#c8d6a8" />
+                <use href="#community-tile" x="314" y="132" color="#c8d6a8" />
+                <use href="#community-tile" x="282" y="148" color="#c8d6a8" />
+                <use href="#community-tile" x="250" y="164" color="#c8d6a8" />
+                <g transform="translate(250 117)">
+                  <path d="M-5 0h10v3h4v12H5v13H-5V15h-4V3h4Z" fill="#bedc46" />
+                  <path d="M-5 17h10v11H-5Z" fill="#28352e" />
+                  <path d="M2 6h3v3H2Z" fill="#28352e" />
+                </g>
+              </g>
+              <g class="map-layer" data-map-layer="1">
+                <use href="#community-tile" x="314" y="164" color="#b9a7d5" />
+                <use href="#community-tile" x="346" y="180" color="#b9a7d5" />
+                <use href="#community-tile" x="378" y="196" color="#b9a7d5" />
+                <use href="#community-tile" x="410" y="212" color="#b9a7d5" />
+                <use href="#community-tile" x="474" y="212" color="#b9a7d5" />
+                <use href="#community-tile" x="442" y="228" color="#b9a7d5" />
+                <use href="#community-tile" x="410" y="244" color="#b9a7d5" />
+                <use href="#community-tile" x="506" y="228" color="#b9a7d5" />
+                <use href="#community-tile" x="474" y="244" color="#b9a7d5" />
+                <use href="#community-tile" x="442" y="260" color="#b9a7d5" />
+                <g transform="translate(483.6 201.8)">
+                  <path d="M-5 0h10v3h4v12H5v13H-5V15h-4V3h4Z" fill="#d8caf1" />
+                  <path d="M-5 17h10v11H-5Z" fill="#28352e" />
+                  <path d="M2 6h3v3H2Z" fill="#28352e" />
+                </g>
+                <g transform="translate(461.2 225.8)">
+                  <path d="M-5 0h10v3h4v12H5v13H-5V15h-4V3h4Z" fill="#bedc46" />
+                  <path d="M-5 17h10v11H-5Z" fill="#28352e" />
+                  <path d="M2 6h3v3H2Z" fill="#28352e" />
+                </g>
+              </g>
+              <g class="map-layer" data-map-layer="2">
+                <use href="#community-tile" x="314" y="196" color="#b5cecb" />
+                <use href="#community-tile" x="282" y="212" color="#b5cecb" />
+                <use href="#community-tile" x="250" y="228" color="#b5cecb" />
+                <use href="#community-tile" x="186" y="228" color="#b5cecb" />
+                <use href="#community-tile" x="154" y="244" color="#b5cecb" />
+                <use href="#community-tile" x="218" y="244" color="#b5cecb" />
+                <use href="#community-tile" x="186" y="260" color="#b5cecb" />
+                <use href="#community-tile" x="250" y="260" color="#b5cecb" />
+                <use href="#community-tile" x="218" y="276" color="#b5cecb" />
+                <g transform="translate(202 227)">
+                  <path d="M-12 0h24v24h-24Z" fill="#526d69" />
+                  <path
+                    d="M-7 10l5 5 10-11"
+                    fill="none"
+                    stroke="#e8f4d2"
+                    stroke-width="3"
+                  />
+                </g>
+              </g>
+              <g class="map-layer" data-map-layer="3">
+                <use href="#community-tile" x="410" y="52" color="#bedc46" />
+                <use href="#community-tile" x="378" y="68" color="#bedc46" />
+                <use href="#community-tile" x="346" y="84" color="#bedc46" />
+                <use href="#community-tile" x="314" y="100" color="#bedc46" />
+                <use href="#community-tile" x="410" y="20" color="#bedc46" />
+                <use href="#community-tile" x="378" y="36" color="#bedc46" />
+                <use href="#community-tile" x="442" y="36" color="#bedc46" />
+                <use href="#community-tile" x="410" y="52" color="#bedc46" />
+                <use href="#community-tile" x="474" y="52" color="#bedc46" />
+                <use href="#community-tile" x="442" y="68" color="#bedc46" />
+                <use href="#community-tile" x="506" y="68" color="#bedc46" />
+                <use href="#community-tile" x="474" y="84" color="#bedc46" />
+                <g transform="translate(442 68)">
+                  <path d="M0 0v-58" stroke="#354a34" stroke-width="3" />
+                  <path d="M0-58h31l-8 10 8 10H0Z" fill="#8ca534" />
+                  <path
+                    d="m8-48 5 5 8-10"
+                    fill="none"
+                    stroke="#eef5d3"
+                    stroke-width="2"
+                  />
+                </g>
+              </g>
+            </svg>
+            <figcaption>
+              <strong data-world-word>A playable beginning.</strong
+              ><span data-world-detail
+                >A small world becomes something people can explore.</span
+              >
+            </figcaption>
+            <div class="world-progress" aria-hidden="true"><span></span></div>
+          </figure>
+          <ol
+            class="lifecycle-steps"
+            aria-label="Game community development model"
+          >
+            <li>
+              <button
+                type="button"
+                data-lifecycle-step="0"
+                aria-pressed="true"
+                aria-controls="community-world"
+              >
+                <span class="step-number">01</span
+                ><span
+                  ><strong>Put a build in players’ hands.</strong
+                  ><span
+                    >A demo, an original game, an authorized remix. Start with
+                    something people can understand and play.</span
+                  ></span
+                ><svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="m9 5 7 7-7 7" />
+                </svg>
+              </button>
+            </li>
+            <li>
+              <button
+                type="button"
+                data-lifecycle-step="1"
+                aria-controls="community-world"
+                aria-pressed="false"
+              >
+                <span class="step-number">02</span
+                ><span
+                  ><strong>Let a community form in public.</strong
+                  ><span
+                    >A game-token raise brings onchain participation into view,
+                    with a clear development plan and token mechanics.</span
+                  ></span
+                ><svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="m9 5 7 7-7 7" />
+                </svg>
+              </button>
+            </li>
+            <li>
+              <button
+                type="button"
+                data-lifecycle-step="2"
+                aria-controls="community-world"
+                aria-pressed="false"
+              >
+                <span class="step-number">03</span
+                ><span
+                  ><strong>Build toward the next milestone.</strong
+                  ><span
+                    >New levels, a balance pass, a fuller release. Creators and
+                    contributors keep developing through the game’s
+                    lifecycle.</span
+                  ></span
+                ><svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="m9 5 7 7-7 7" />
+                </svg>
+              </button>
+            </li>
+            <li>
+              <button
+                type="button"
+                data-lifecycle-step="3"
+                aria-controls="community-world"
+                aria-pressed="false"
+              >
+                <span class="step-number">04</span
+                ><span
+                  ><strong>Let outcomes shape what’s next.</strong
+                  ><span
+                    >Our futarchy-inspired direction explores markets around
+                    development proposals and shared outcomes, adapted to the
+                    decisions a game community makes.</span
+                  ></span
+                ><svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="m9 5 7 7-7 7" />
+                </svg>
+              </button>
+            </li>
+          </ol>
+        </div>
+        <div class="container lifecycle-bottom">
+          <p>
+            Today: game-token markets and lifecycle stages on Devnet. Creator
+            launches, collaborative development and futarchy tools are planned.
+          </p>
+          <a class="inline-link" href="https://devnet.plemu.xyz/market"
+            >Meet the game markets <span aria-hidden="true">↗</span></a
+          >
+        </div>
+      </section>
+      <section
+        class="remix-section container"
+        id="remix"
+        aria-labelledby="remix-title"
+      >
+        <div class="remix-heading">
+          <p class="story-label">Same roots. Different worlds.</p>
+          <h2 id="remix-title">What could you<br />make of it?</h2>
+          <p class="section-description">
+            Our growing research roster brings decompilations, disassemblies and
+            rebuild projects into view. A starting point for communities to
+            study, modify and turn into original or authorized experiences.
+          </p>
+        </div>
+        <figure
+          class="remix-art"
+          id="remix-preview"
+          data-remix-art="world"
+          data-ambient-art
+        >
+          <div class="remix-comparison">
+            <div class="mini-world mini-world-original">
+              <span class="mini-world-label">A starting point</span>
+              <div class="mini-moon"></div>
+              <div class="mini-mountains"></div>
+              <div class="mini-ground"></div>
+              <div class="mini-player"></div>
+            </div>
+            <div class="mini-world mini-world-remix">
+              <span class="mini-world-label">Your next idea</span>
+              <div class="mini-moon"></div>
+              <div class="mini-mountains"></div>
+              <div class="mini-ground"></div>
+              <div class="mini-player"></div>
+              <div class="mini-player mini-player-two"></div>
+              <div class="mini-player mini-player-three"></div>
+              <div class="mini-platform"></div>
+              <div class="mini-quest"></div>
+              <div class="mini-assist"></div>
+              <i class="mini-star"></i
+              ><span class="mini-hud" data-remix-hud>Explore a new world</span>
+            </div>
+          </div>
+          <figcaption data-remix-caption aria-live="polite">
+            Reimagine a level, a setting or an entire journey. An illustration
+            of remix possibilities.
+          </figcaption>
+        </figure>
+        <div
+          class="remix-options"
+          role="group"
+          aria-label="Explore customization ideas"
+        >
+          <button
+            type="button"
+            data-remix-choice="world"
+            aria-pressed="true"
+            aria-controls="remix-preview"
+          >
+            <svg viewBox="0 0 32 32" aria-hidden="true">
+              <path d="M4 18 10 5l7 9 5-5 6 15H4Z" /></svg
+            ><span
+              ><strong>New worlds</strong
+              ><small>Build new maps, biomes and routes.</small></span
+            ></button
+          ><button
+            type="button"
+            data-remix-choice="rules"
+            aria-pressed="false"
+            aria-controls="remix-preview"
+          >
+            <svg viewBox="0 0 32 32" aria-hidden="true">
+              <path d="M7 6v20m9-20v20m9-20v20M3 12h8m1 9h8m1-11h8" /></svg
+            ><span
+              ><strong>New rules</strong
+              ><small>Change movement, combat and difficulty.</small></span
+            ></button
+          ><button
+            type="button"
+            data-remix-choice="characters"
+            aria-pressed="false"
+            aria-controls="remix-preview"
+          >
+            <svg viewBox="0 0 32 32" aria-hidden="true">
+              <path d="M9 5h14v12H9ZM7 29v-9h18v9M12 10h1m6 0h1" /></svg
+            ><span
+              ><strong>New characters</strong
+              ><small>Create a cast with its own abilities.</small></span
+            ></button
+          ><button
+            type="button"
+            data-remix-choice="multiplayer"
+            aria-pressed="false"
+            aria-controls="remix-preview"
+          >
+            <svg viewBox="0 0 32 32" aria-hidden="true">
+              <path
+                d="M6 8h8v8H6Zm12 0h8v8h-8ZM3 27v-8h14v8m-2 0v-8h14v8"
+              /></svg
+            ><span
+              ><strong>Play together</strong
+              ><small>Add co-op, rivalries and shared worlds.</small></span
+            ></button
+          ><button
+            type="button"
+            data-remix-choice="quests"
+            aria-pressed="false"
+            aria-controls="remix-preview"
+          >
+            <svg viewBox="0 0 32 32" aria-hidden="true">
+              <path d="M6 4h20v24H6Zm5 6h10m-10 6h10m-10 6h6" /></svg
+            ><span
+              ><strong>New stories</strong
+              ><small>Write quests, choices and branching endings.</small></span
+            ></button
+          ><button
+            type="button"
+            data-remix-choice="accessibility"
+            aria-pressed="false"
+            aria-controls="remix-preview"
+          >
+            <svg viewBox="0 0 32 32" aria-hidden="true">
+              <path d="M6 10h20v14H6Zm4 4v6m-3-3h6m7-1h1m2 4h1" /></svg
+            ><span
+              ><strong>More ways to play</strong
+              ><small>Remap inputs, clarify cues and adjust pace.</small></span
+            >
+          </button>
+        </div>
+        <p class="source-note">
+          A growing research roster, with room for entirely new experiences.
+          Changes shown here are illustrative. Remix tools and publishing are in
+          development; distribution requires the relevant code, asset and game
+          permissions.
+        </p>
       </section>
       <section
         class="onchain-section container"
@@ -883,9 +1023,9 @@
     </footer>
     <noscript
       ><style>
-        .ph-controls,
+        .ph-pause,
         .seeker-controls,
-        .remix-switches {
+        .remix-options {
           display: none !important;
         }
         .lifecycle-steps button {

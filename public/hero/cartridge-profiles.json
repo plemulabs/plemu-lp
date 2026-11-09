@@ -1,0 +1,33 @@
+{
+  "width": 1,
+  "height": 1.2,
+  "depth": 0.09,
+  "labelRect": [0.065, 0.12, 0.87, 0.78],
+  "outline": [
+    [0, 0.04],
+    [0, 0.96],
+    [0.04, 1],
+    [0.96, 1],
+    [1, 0.96],
+    [1, 0.04],
+    [0.96, 0],
+    [0.04, 0]
+  ],
+  "contacts": 9,
+  "profiles": {
+    "gb": {
+      "shell": "#a6abb5",
+      "trim": "#525766",
+      "accent": "#916bc7"
+    },
+    "gba": {
+      "shell": "#454d80",
+      "trim": "#292e4f",
+      "accent": "#a1a8f2"
+    }
+  },
+  "source": "apps/device/unity/Assets/_Game/Scripts/Runtime/UI/ConsoleCartridgeProfile.cs",
+  "sourceSha256": "fced5ff4444da08ea573ab4225f58ba9ce2ea538520a1c1b928642672d22407a",
+  "meshSource": "apps/device/unity/Assets/_Game/Scripts/Runtime/UI/Cartridge3DView.cs",
+  "meshSourceSha256": "4a589600ca3004d1d0595ccc3097aa3fe9ff7fb960370087397efd7863bc4efb"
+}

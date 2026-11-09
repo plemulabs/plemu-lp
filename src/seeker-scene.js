@@ -346,8 +346,9 @@ export async function mountSeeker(root) {
     canvas.remove();
     root.dataset.scene = "fallback";
     controls.removeAttribute("aria-busy");
-    root.querySelector("[data-seeker-turn]").hidden = true;
-    root.querySelector("[data-seeker-motion]").hidden = true;
+    renderArea.removeAttribute("tabindex");
+    renderArea.removeAttribute("role");
+    renderArea.removeAttribute("aria-label");
     root.querySelector("[data-seeker-hint]").hidden = true;
   }
   try {
@@ -431,15 +432,19 @@ export async function mountSeeker(root) {
     }
     function updateMotionControl() {
       root.dataset.motion = paused ? "paused" : "playing";
-      const button = root.querySelector("[data-seeker-motion]");
-      button.setAttribute("aria-pressed", String(paused));
-      button.setAttribute(
+      renderArea.setAttribute(
         "aria-label",
-        paused ? "Play Seeker animation" : "Pause Seeker animation",
+        `Interactive Seeker model. Drag or use arrow keys to turn. Press Enter to show the other side. Tap or press Space to ${paused ? "resume" : "pause"} animation.`,
       );
-      button.querySelector("[data-motion-icon]").textContent = paused
-        ? "▷"
-        : "Ⅱ";
+      root.querySelector("[data-seeker-hint]").textContent = paused
+        ? " Drag to turn. Tap to resume."
+        : " Drag to turn. Tap to pause.";
+    }
+    function toggleMotion() {
+      manualMotionChoice = true;
+      paused = !paused;
+      updateMotionControl();
+      wake();
     }
     root.querySelectorAll("[data-seeker-screen]").forEach((button) => {
       button.addEventListener(
@@ -467,7 +472,7 @@ export async function mountSeeker(root) {
               .forEach((other) =>
                 other.setAttribute("aria-pressed", String(other === button)),
               );
-            hint.textContent = " Drag to turn, or use the controls.";
+            updateMotionControl();
             wake();
           } catch {
             if (!disposed && selection === screenSelection)
@@ -481,21 +486,31 @@ export async function mountSeeker(root) {
         { signal },
       );
     });
-    root.querySelector("[data-seeker-turn]").addEventListener(
-      "click",
-      () => {
-        backShown = !backShown;
-        targetYaw = backShown ? Math.PI - 0.3 : FRONT;
-        wake();
-      },
-      { signal },
-    );
-    root.querySelector("[data-seeker-motion]").addEventListener(
-      "click",
-      () => {
-        manualMotionChoice = true;
-        paused = !paused;
-        updateMotionControl();
+    renderArea.addEventListener(
+      "keydown",
+      (event) => {
+        if (event.target !== renderArea) return;
+        if (
+          [
+            "ArrowLeft",
+            "ArrowRight",
+            "ArrowUp",
+            "ArrowDown",
+            "Enter",
+            " ",
+          ].includes(event.key)
+        )
+          event.preventDefault();
+        if (event.key === "ArrowLeft") targetYaw -= 0.5;
+        else if (event.key === "ArrowRight") targetYaw += 0.5;
+        else if (event.key === "ArrowUp")
+          targetPitch = MathUtils.clamp(targetPitch - 0.08, -0.35, 0.35);
+        else if (event.key === "ArrowDown")
+          targetPitch = MathUtils.clamp(targetPitch + 0.08, -0.35, 0.35);
+        else if (event.key === "Enter" && !event.repeat) {
+          backShown = !backShown;
+          targetYaw = backShown ? Math.PI - 0.3 : FRONT;
+        } else if (event.key === " " && !event.repeat) toggleMotion();
         wake();
       },
       { signal },
@@ -540,8 +555,13 @@ export async function mountSeeker(root) {
       },
       { signal },
     );
-    const release = () => {
+    const release = (event) => {
+      if (!drag || drag.pointer !== event.pointerId) return;
+      const tap =
+        event.type === "pointerup" &&
+        Math.hypot(event.clientX - drag.x, event.clientY - drag.y) < 8;
       drag = null;
+      if (tap) toggleMotion();
     };
     canvas.addEventListener("pointerup", release, { signal });
     canvas.addEventListener("pointercancel", release, { signal });
@@ -597,8 +617,8 @@ export async function mountSeeker(root) {
     holder.append(canvas);
     root.dataset.scene = "ready";
     controls.hidden = false;
-    root.querySelector("[data-seeker-turn]").hidden = false;
-    root.querySelector("[data-seeker-motion]").hidden = false;
+    renderArea.tabIndex = 0;
+    renderArea.setAttribute("role", "group");
     root.querySelector("[data-seeker-hint]").hidden = false;
     updateMotionControl();
     wake();
