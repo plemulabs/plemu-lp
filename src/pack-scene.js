@@ -352,6 +352,7 @@ export async function mountPackScene(art) {
       media.matches ||
       (art.matches(":focus-within") && pack.dataset.packState !== "tearing");
     if (!paused) elapsed += delta;
+    key.position.x = -4 + Math.sin(elapsed * 0.35) * 0.65;
     const blend = media.matches || !mounted ? 1 : 1 - Math.exp(-delta * 14);
     tear += (targetTear - tear) * blend;
     reveal += (targetReveal - reveal) * blend;

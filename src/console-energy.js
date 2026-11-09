@@ -49,12 +49,12 @@ export function createConsoleEnergy(scene) {
   const group = new Group();
   group.visible = false;
   scene.add(group);
-  const light = new PointLight(0xd2f57c, 0, 5, 2);
+  const light = new PointLight(0xd2f57c, 0, 5.4, 2);
   light.position.set(0, 0.8, 0.2);
   // Keep the light registered at zero intensity so insertion reuses warmed shaders.
   scene.add(light);
   const halo = new Mesh(
-    new PlaneGeometry(5, 3),
+    new PlaneGeometry(5.3, 3.1),
     new MeshBasicMaterial({
       map: glowTexture(),
       transparent: true,
@@ -86,7 +86,7 @@ export function createConsoleEnergy(scene) {
     new Color("#99d8d0"),
   ];
   for (let i = 0; i < 18; i++) coins.setColorAt(i, colors[i % 3]);
-  const positions = new Float32Array(24 * 3);
+  const positions = new Float32Array(32 * 3);
   const geometry = new BufferGeometry();
   geometry.setAttribute("position", new Float32BufferAttribute(positions, 3));
   const sparkles = new Points(
@@ -94,7 +94,7 @@ export function createConsoleEnergy(scene) {
     new PointsMaterial({
       map: glowTexture(true),
       color: 0xe2f9b6,
-      size: 0.26,
+      size: 0.31,
       transparent: true,
       opacity: 0.5,
       depthWrite: false,
@@ -116,7 +116,7 @@ export function createConsoleEnergy(scene) {
     update(time, delta, seated, paused) {
       if (seated && !wasSeated) poweredAt = time;
       wasSeated = seated;
-      const burst = paused ? 0 : Math.max(0, 1 - (time - poweredAt) / 0.75);
+      const burst = paused ? 0 : Math.max(0, 1 - (time - poweredAt) / 0.9);
       strength = paused
         ? Number(seated)
         : strength + (Number(seated) - strength) * (1 - Math.exp(-delta * 9));
@@ -125,8 +125,8 @@ export function createConsoleEnergy(scene) {
         light.intensity = 0;
         return;
       }
-      light.intensity = strength * (1.65 + Math.sin(time * 2.2) * 0.2);
-      halo.material.opacity = strength * (0.22 + Math.sin(time * 1.6) * 0.025);
+      light.intensity = strength * (2.05 + Math.sin(time * 2.2) * 0.28);
+      halo.material.opacity = strength * (0.3 + Math.sin(time * 1.6) * 0.04);
       coins.material.opacity = 0.19 * strength;
       for (let i = 0; i < 18; i++) {
         const lane = i % 3,
@@ -148,17 +148,17 @@ export function createConsoleEnergy(scene) {
         coins.setMatrixAt(i, matrix);
       }
       coins.instanceMatrix.needsUpdate = true;
-      for (let i = 0; i < 24; i++) {
+      for (let i = 0; i < 32; i++) {
         const angle = i * 2.399,
           pulse = Math.sin(time * 1.4 + i * 2.1);
         positions[i * 3] = Math.cos(angle) * (1.4 + (i % 4) * 0.45);
-        positions[i * 3 + 1] = 0.38 + Math.max(0, pulse) * 0.45;
+        positions[i * 3 + 1] = 0.42 + Math.max(0, pulse) * 0.6;
         positions[i * 3 + 2] = Math.sin(angle) * (1 + (i % 3) * 0.2);
       }
       geometry.attributes.position.array.set(positions);
       geometry.attributes.position.needsUpdate = true;
       sparkles.material.opacity =
-        strength * (0.35 + burst * 0.18 + Math.sin(time * 2.4) * 0.12);
+        strength * (0.44 + burst * 0.24 + Math.sin(time * 2.4) * 0.14);
     },
   };
 }

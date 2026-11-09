@@ -6,6 +6,18 @@ export function bindCartridgeInput(
   const cancel = () => {
     pointer = null;
   };
+  function feedback(event) {
+    const box = stage.getBoundingClientRect();
+    stage.dispatchEvent(
+      new CustomEvent("plemu:gesture", {
+        bubbles: true,
+        detail: {
+          x: event.clientX ?? box.x + box.width * 0.5,
+          y: event.clientY ?? box.y + box.height * 0.55,
+        },
+      }),
+    );
+  }
   stage.addEventListener(
     "pointerdown",
     (event) => {
@@ -31,10 +43,12 @@ export function bindCartridgeInput(
     if (Math.abs(dx) > Math.abs(dy) * 1.15) {
       pointer.consumed = true;
       navigate(dx < 0 ? 1 : -1);
+      feedback(event);
     } else if (Math.abs(dy) > Math.abs(dx) * 1.15) {
       pointer.consumed = true;
       if (dy > 0) insert();
       else eject();
+      feedback(event);
     }
   }
   stage.addEventListener("pointermove", swipe, { signal });
@@ -48,12 +62,14 @@ export function bindCartridgeInput(
         enabled() &&
         !pointer.consumed &&
         Math.hypot(event.clientX - pointer.x, event.clientY - pointer.y) < 10
-      )
+      ) {
         activate({
           x: event.clientX,
           y: event.clientY,
           target: pointer.target,
         });
+        feedback(event);
+      }
       cancel();
     },
     { signal },
@@ -67,13 +83,18 @@ export function bindCartridgeInput(
       if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
         event.preventDefault();
         navigate(event.key === "ArrowRight" ? 1 : -1);
+        feedback(event);
       } else if (event.key === "ArrowDown" || event.key === "ArrowUp") {
         event.preventDefault();
         if (event.key === "ArrowDown") insert();
         else eject();
+        feedback(event);
       } else if (event.key === "Enter" || event.key === " ") {
         event.preventDefault();
-        if (!event.repeat) activate();
+        if (!event.repeat) {
+          activate();
+          feedback(event);
+        }
       }
     },
     { signal },

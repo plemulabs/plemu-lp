@@ -3,6 +3,8 @@ import "./product-story.css";
 import "./cartridge-hero.css";
 import "./seeker.css";
 import "./landing-motion.css";
+import "./pixel-effects.css";
+import { mountPixelEffects } from "./pixel-effects.js";
 import { bindCartridgeInput } from "./cartridge-input.js";
 import { mountProductStories } from "./product-interactions.js";
 
@@ -182,6 +184,7 @@ enhanceNearViewport(showcase, async () => {
 });
 
 mountProductStories(motion, saveData);
+mountPixelEffects(motion, saveData);
 if ("IntersectionObserver" in window) {
   const ambient = new IntersectionObserver(
     (entries) =>
