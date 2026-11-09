@@ -1,0 +1,19 @@
+{
+  "geometrySource": "Plemu native Pack3DView.cs",
+  "geometrySha256": "64bb7a8e0aeb5064478095d5054786f4678969c1a7e8eaeba4532e0d30cda1dc",
+  "packDimensions": {
+    "halfWidth": 0.92,
+    "bottom": -1.38,
+    "seam": 0.94,
+    "top": 1.39,
+    "segments": 40
+  },
+  "brandColors": {
+    "body": "#8c76db",
+    "seal": "#b6d935",
+    "silver": "#b8c2d9"
+  },
+  "logo": "/brand/plemu-pack-mark.png",
+  "logoSha256": "caacfb074e650855f096bf447bc6adc9f43b87543fad5eaf033a6f5808211bf2",
+  "interaction": "Native foil and reveal equations adapted for Three.js. Preview only; no wallet or purchase."
+}

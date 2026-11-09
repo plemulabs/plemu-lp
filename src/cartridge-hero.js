@@ -28,10 +28,11 @@ import {
   WebGLRenderer,
 } from "three";
 import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
+import { createConsoleEnergy } from "./console-energy.js";
 import { bindCartridgeInput } from "./cartridge-input.js";
 
-import { CARTRIDGE_GAMES as HERO_GAMES } from "./cartridge-catalog.js";
-export { CARTRIDGE_GAMES as HERO_GAMES } from "./cartridge-catalog.js";
+import { HERO_GAMES } from "./cartridge-catalog.js";
+export { HERO_GAMES } from "./cartridge-catalog.js";
 
 const SLOT = new Vector3(0, 0.76, -0.35);
 const ALIGN = new Vector3(0, 3.4, -0.35);
@@ -487,7 +488,7 @@ function createConsole() {
   };
 }
 
-function createCartridge(game, index) {
+export function createCartridge(game, index = 0) {
   const group = new Group();
   group.userData.gameIndex = index;
   const shell = new MeshPhysicalMaterial({
@@ -564,14 +565,16 @@ function createCartridge(game, index) {
   );
   repeatedBoxes(
     group,
-    Array.from({ length: 3 }, (_, i) => [
-      -0.938,
-      (-0.24 + i * 0.12) * 2.4,
-      0.101,
-      0.044,
-      0.06,
-      0.008,
-    ]),
+    (game.code === "SNES" ? [-1, 1] : [-1]).flatMap((side) =>
+      Array.from({ length: game.code === "SNES" ? 4 : 3 }, (_, i) => [
+        side * 0.938,
+        (-0.24 + i * 0.12) * 2.4,
+        0.101,
+        0.044,
+        0.06,
+        0.008,
+      ]),
+    ),
     trim,
   );
   const back = box(group, 0, 0, -0.103, 1.76, 1.92, 0.014, trim);
@@ -704,6 +707,7 @@ export async function mountCartridgeHero(root) {
     environment,
     cards = [],
     consoleModel,
+    energy,
     observer,
     resizeObserver;
   const textures = new Set();
@@ -746,6 +750,7 @@ export async function mountCartridgeHero(root) {
     root.dataset.selected = game.slug;
     root.dataset.motion = paused ? "paused" : "playing";
     root.dataset.paused = String(paused);
+    root.dataset.energy = seated ? (paused ? "steady" : "flowing") : "off";
     staticCards.forEach((card) =>
       card.classList.toggle(
         "is-selected",
@@ -978,6 +983,7 @@ export async function mountCartridgeHero(root) {
     consoleModel.lightMaterial.emissiveIntensity = glow;
     consoleModel.latchMaterial.emissiveIntensity = glow * 0.6;
     consoleModel.latch.position.y = 0.272 - (seated ? 0.04 : 0);
+    energy?.update(elapsed, delta, seated, paused);
     renderer.render(scene, camera);
     renderCount++;
     if (!paused || action) wake();
@@ -1083,6 +1089,7 @@ export async function mountCartridgeHero(root) {
     scene.add(new AmbientLight(0xffffff, 0.5));
     consoleModel = createConsole();
     scene.add(consoleModel.group);
+    energy = createConsoleEnergy(scene);
     cards = HERO_GAMES.map((game, index) => createCartridge(game, index));
     cards.forEach((card) => scene.add(card.group));
     placeCards(true);

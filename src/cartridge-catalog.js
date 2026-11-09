@@ -1,5 +1,6 @@
 export const CARTRIDGE_GAMES = Object.freeze([
   Object.freeze({
+    placement: "hero",
     slug: "gb-adjustris",
     title: "Adjustris",
     short: "Adjustris",
@@ -13,6 +14,7 @@ export const CARTRIDGE_GAMES = Object.freeze([
     accent: "#916bc7",
   }),
   Object.freeze({
+    placement: "hero",
     slug: "gba-2048-advance",
     title: "2048 Advance",
     short: "2048 Advance",
@@ -26,6 +28,7 @@ export const CARTRIDGE_GAMES = Object.freeze([
     accent: "#a1a8f2",
   }),
   Object.freeze({
+    placement: "hero",
     slug: "gba-spindown",
     title: "Spindown",
     short: "Spindown",
@@ -39,6 +42,7 @@ export const CARTRIDGE_GAMES = Object.freeze([
     accent: "#a1a8f2",
   }),
   Object.freeze({
+    placement: "hero",
     slug: "gb-libbet",
     title: "Libbet and the Magic Floor",
     short: "Libbet",
@@ -51,4 +55,84 @@ export const CARTRIDGE_GAMES = Object.freeze([
     trim: 0x525766,
     accent: "#916bc7",
   }),
+  Object.freeze({
+    placement: "collection",
+    slug: "gb-quartet",
+    title: "Quartet",
+    short: "Quartet",
+    system: "Game Boy",
+    code: "GB",
+    author: "Mackerel Interactive",
+    cover: "/hero/quartet.jpg",
+    color: "#916bc7",
+    shell: 10922933,
+    trim: 5396326,
+    accent: "#916bc7",
+  }),
+  Object.freeze({
+    placement: "collection",
+    slug: "gb-unearthed-zero",
+    title: "Unearthed Zero",
+    short: "Unearthed Zero",
+    system: "Game Boy",
+    code: "GB",
+    author: "BenJelter and Gumpy Function",
+    cover: "/hero/unearthed-zero.png",
+    color: "#916bc7",
+    shell: 10922933,
+    trim: 5396326,
+    accent: "#916bc7",
+  }),
+  Object.freeze({
+    placement: "pack",
+    slug: "gbc-color-lines",
+    title: "Color Lines",
+    short: "Color Lines",
+    system: "Game Boy Color",
+    code: "GBC",
+    author: "cosmigo (pan|cgo, dsc|cgo, bfa|cgo)",
+    cover: "/hero/color-lines.png",
+    color: "#c2e833",
+    shell: 5717388,
+    trim: 3352914,
+    accent: "#c2e833",
+  }),
+  Object.freeze({
+    placement: "pack",
+    slug: "gbc-ucity",
+    title: "uCity",
+    short: "uCity",
+    system: "Game Boy Color",
+    code: "GBC",
+    author: "AntonioND (SkyLyrac)",
+    cover: "/hero/ucity.png",
+    color: "#c2e833",
+    shell: 5717388,
+    trim: 3352914,
+    accent: "#c2e833",
+  }),
+  Object.freeze({
+    placement: "pack",
+    slug: "snes-helheim",
+    title: "Helheim",
+    short: "Helheim",
+    system: "SNES",
+    code: "SNES",
+    author: "asbiz",
+    cover: "/hero/helheim.png",
+    color: "#7d5ec2",
+    shell: 11382202,
+    trim: 6513013,
+    accent: "#7d5ec2",
+  }),
 ]);
+
+export const HERO_GAMES = Object.freeze(
+  CARTRIDGE_GAMES.filter((game) => game.placement === "hero"),
+);
+export const COLLECTION_GAMES = Object.freeze(
+  CARTRIDGE_GAMES.filter((game) => game.placement === "collection"),
+);
+export const PACK_GAMES = Object.freeze(
+  CARTRIDGE_GAMES.filter((game) => game.placement === "pack"),
+);

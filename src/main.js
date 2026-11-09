@@ -2,6 +2,7 @@ import "./styles.css";
 import "./product-story.css";
 import "./cartridge-hero.css";
 import "./seeker.css";
+import "./landing-motion.css";
 import { bindCartridgeInput } from "./cartridge-input.js";
 import { mountProductStories } from "./product-interactions.js";
 
@@ -111,10 +112,11 @@ const screens = {
   },
   market: {
     src: "/images/seeker-market-current.png",
-    alt: "Plemu installed on Seeker, showing its native beta Market screen",
+    alt: "Plemu installed on Seeker, showing the native Apotris market detail, chart and trade panel. Captured Devnet snapshot",
   },
 };
 const showcase = document.querySelector("[data-seeker-showcase]");
+const packArt = document.querySelector(".collection-art");
 if (showcase) {
   showcase.dataset.screen = "discover";
   showcase.querySelectorAll("[data-seeker-screen]").forEach((button) => {
@@ -142,6 +144,8 @@ function enhanceNearViewport(node, enhance) {
         if (node === arcade) {
           node.dataset.heroState = "fallback";
           node.dataset.controlsOwner = "light";
+        } else if (node === packArt) {
+          node.dataset.packRender = "fallback";
         } else {
           node.dataset.scene = "fallback";
           node.querySelector("[data-seeker-hint]").hidden = true;
@@ -167,6 +171,10 @@ function enhanceNearViewport(node, enhance) {
 enhanceNearViewport(arcade, async () => {
   const { mountCartridgeHero } = await import("./cartridge-hero.js");
   await mountCartridgeHero(arcade);
+});
+enhanceNearViewport(packArt, async () => {
+  const { mountPackScene } = await import("./pack-scene.js");
+  await mountPackScene(packArt);
 });
 enhanceNearViewport(showcase, async () => {
   const { mountSeeker } = await import("./seeker-scene.js");

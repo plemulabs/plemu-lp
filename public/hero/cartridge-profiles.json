@@ -24,6 +24,16 @@
       "shell": "#454d80",
       "trim": "#292e4f",
       "accent": "#a1a8f2"
+    },
+    "gbc": {
+      "shell": "#573d8c",
+      "trim": "#332952",
+      "accent": "#c2e833"
+    },
+    "snes": {
+      "shell": "#adadba",
+      "trim": "#636175",
+      "accent": "#7d5ec2"
     }
   },
   "source": "apps/device/unity/Assets/_Game/Scripts/Runtime/UI/ConsoleCartridgeProfile.cs",

@@ -41,7 +41,7 @@ const screens = {
   },
   market: {
     src: "/images/seeker-market-current.png",
-    alt: "Plemu installed on Seeker, showing its native beta Market screen",
+    alt: "Plemu installed on Seeker, showing the native Apotris market detail, chart and trade panel. Captured Devnet snapshot",
   },
 };
 

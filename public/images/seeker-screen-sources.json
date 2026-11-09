@@ -33,12 +33,20 @@
     {
       "screen": "market",
       "asset": "seeker-market-current.png",
-      "sha256": "1244c088028df83431871c1b9b6cabdbe22aac41f52c5cbe035f3940f3bb997c",
+      "sha256": "9cad4cf51f98fb76d1b6382f029bfcec96e09e628c54b04b361cb9a622e93c17",
       "width": 1080,
       "height": 2400,
       "source": "Actual Plemu Seeker beta native app UI capture",
       "appVersion": "1.4.8-devnet",
-      "captureMethod": "Unmodified Unity UI render. No mock balance or market values added."
+      "captureMethod": "Unmodified native market-detail UI rendered with captured confirmed Devnet account and trade responses. Native account, reserve and event validation retained. Disconnected wallet. No balances, quotes or history invented. This is a captured snapshot, not a live quote.",
+      "market": "Apotris",
+      "captureDate": "2026-11-09",
+      "readMethods": {
+        "getMultipleAccounts": 1,
+        "getMinimumBalanceForRentExemption": 1,
+        "getSignaturesForAddress": 1,
+        "getTransaction": 12
+      }
     }
   ]
 }

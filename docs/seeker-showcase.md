@@ -10,7 +10,9 @@
 - Rendering stops when the section leaves the viewport or the document is hidden. Page teardown releases GPU resources.
 - Without WebGL, or with data saver enabled, the screen selector works with a static handset. Without JavaScript, static imagery and direct Packs/Market screenshot links remain available. Context loss returns to the static selector.
 
-The hero and handset share the dynamically loaded Three.js environment code. Pixel ratio is capped at 1.5 on narrow screens and 1.75 elsewhere. The hero is a separate component; no second handset appears there.
+The Market capture shows Apotris’s individual market, chart and trade panel. It uses validated confirmed Devnet responses captured on November 9, 2026; it is a static historical snapshot, not a live quote. The native app’s account, reserve and event validation ran before the capture, and no balances, prices or fills were invented.
+
+The hero, pack and handset share the dynamically loaded Three.js environment code. Pixel ratio is capped at 1.5 on narrow screens and 1.75 elsewhere. The hero is a separate component; no second handset appears there.
 
 ## Model and image sources
 
